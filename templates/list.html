@@ -52,7 +52,7 @@
                                 <td>{{$index+1}}</td>
 
                                 <%- for column_info in field_list %>
-                                <td>{{item.<< column_info.col_name >><% if column_info.col_type == 'date' %>|date:'yyyy-MM-dd'<% endif %></td>
+                                <td>{{ item.<< column_info.col_name >><% if column_info.col_type == 'date' %>|date:'yyyy-MM-dd'<% endif %> }}</td>
                                 <%- endfor %>
 
                             </tr>
