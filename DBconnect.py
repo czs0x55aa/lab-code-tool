@@ -1,6 +1,7 @@
 # coding=utf8
 import cx_Oracle
 import os
+import re
 
 # default configuation
 os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
@@ -29,6 +30,7 @@ class OracleManager(object):
         """
         查询表结构，包括：英文列名，列类型，中文列名，数据长度，精度
         """
+        # 两张表的联合查询语句
         query_sql = """
             select user_tab_columns.column_name, user_tab_columns.data_type, user_col_comments.comments, user_tab_columns.data_length, user_tab_columns.data_scale
             from user_tab_columns
@@ -36,11 +38,33 @@ class OracleManager(object):
             WHERE user_tab_columns.table_name='%s' and user_col_comments.table_name=user_tab_columns.table_name
         """ % table_name
         query_res = self.execute_sql(query_sql)
-        res_list = []
+        # 定义要过滤掉的字段名
+        ignore_col_lsit = ['IsDeleted', 'DeleterUserCD', 'DeletionTime', 'LastModificationTime', 'CreationTime', 'CreatorUserCD']
+        # 用于封装的键名
         dict_key = ['col_name', 'col_type', 'col_comment', 'col_len', 'col_scale']
+        # 数据库中类型到前端页面类型的映射
+        type_transform = {
+            'TIMESTAMP': 'date',
+            'NUMBER': 'number',
+            'VARCHAR': 'string'
+        }
+        re_data_type = re.compile('([A-z]+)')
+        # 根据键名执行相应的数据处理
+        def data_process(element):
+            key, val = element
+            if key == 'col_type':
+                tf_key = re_data_type.findall(val)[0]
+                return [key, type_transform[tf_key]]
+            elif key == 'col_comment':
+                return [key, val.decode('utf8')]
+            else:
+                return list(element)
+        res_list = []
         for item in query_res:
-            item_dict = {}
-            for i in range(len(item)):
-                item_dict[dict_key[i]] = item[i]
+            # 过滤掉不用返回的列
+            if item[0] in ignore_col_lsit:
+                continue
+            # 将列的属性处理成字典的封装形式
+            item_dict = dict([data_process(x) for x in zip(dict_key, item)])
             res_list.append(item_dict)
         return res_list
