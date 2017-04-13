@@ -1,5 +1,6 @@
 # coding=UTF8
 from jinja2 import Environment, FileSystemLoader
+import os
 
 class CodeBuilder(object):
     def __init__(self, config_dict):
@@ -10,7 +11,7 @@ class HTMLBuilder(CodeBuilder):
         template = self.env.get_template(template_page)
         render_res = template.render(**render_packet)
         if output_path is not None:
-            with open(output_path, 'w') as out:
+            with open(os.path.join(os.path.abspath(os.curdir), output_path), 'w') as out:
                 out.write(render_res.encode('utf8'))
         return render_res
 
@@ -43,5 +44,22 @@ if __name__ == '__main__':
     }
     # 创建生成器对象，并输出一个页面
     code_builder = HTMLBuilder(config_dict)
-    code_builder.create_html('list.html', render_module, 'list.html')
-    code_builder.create_html('edit.html', render_module, 'edit.html')
+
+    # 清理 新建 output directory
+    curPath = os.path.abspath(os.curdir)
+    outPath = os.path.join(curPath, 'out')
+    if os.path.exists(outPath):
+        for i in os.listdir(outPath):
+            os.remove(os.path.join(curPath, 'out', i))
+    else:
+        os.mkdir(outPath)
+
+    def out_html(file):
+        code_builder.create_html(file, render_module, 'out/' + file)
+
+    out_html('list.html')
+    out_html('edit.html')
+    out_html('controller.js')
+    out_html('dicserver.js')
+    out_html('route.js')
+    out_html('server.js')
