@@ -10,6 +10,7 @@ oracle_user = 'gxzy_user'
 oracle_passwd = 'gxzy_user_2291862'
 oracle_dsn = cx_Oracle.makedsn("172.16.24.249", "1521", "GXZY")
 
+
 # # 获取表的字段名
 # SELECT column_name FROM user_tab_columns WHERE table_name='AnnualProtocol'
 
@@ -39,32 +40,49 @@ class OracleManager(object):
         """ % table_name
         query_res = self.execute_sql(query_sql)
         # 定义要过滤掉的字段名
-        ignore_col_lsit = ['IsDeleted', 'DeleterUserCD', 'DeletionTime', 'LastModificationTime', 'CreationTime', 'CreatorUserCD']
+        ignore_col_list = ['ID', 'IsDeleted', 'DeleterUserCD', 'DeletionTime', 'LastModificationTime', 'CreationTime', 'CreatorUserCD']
         # 用于封装的键名
         dict_key = ['col_name', 'col_type', 'col_comment', 'col_len', 'col_scale']
         # 数据库中类型到前端页面类型的映射
         type_transform = {
             'TIMESTAMP': 'date',
+            'DATE': 'date',
             'NUMBER': 'number',
             'VARCHAR': 'string'
         }
         re_data_type = re.compile('([A-z]+)')
+
         # 根据键名执行相应的数据处理
+        # def data_process(element):
+        #     key, val = element
+        #     if key == 'col_type':
+        #         tf_key = re_data_type.findall(val)[0]
+        #         return [key, type_transform[tf_key]]
+        #     elif key == 'col_comment':
+        #         print key, val
+        #         return [key, val if val == None else val.decode('utf8')]
+        #     else:
+        #         return list(element)
+
         def data_process(element):
-            key, val = element
-            if key == 'col_type':
-                tf_key = re_data_type.findall(val)[0]
-                return [key, type_transform[tf_key]]
-            elif key == 'col_comment':
-                return [key, val.decode('utf8')]
-            else:
-                return list(element)
+            return_list = {}
+            for item in element:
+                key, val = item
+                if key == 'col_type':
+                    tf_key = re_data_type.findall(val)[0]
+                    return_list[key] = type_transform[tf_key]
+                elif key == 'col_comment':
+                    return_list[key] = element[0][1] if val is None else val.decode('utf-8')
+                else:
+                    return_list[key] = val
+            return return_list
+
         res_list = []
         for item in query_res:
             # 过滤掉不用返回的列
-            if item[0] in ignore_col_lsit:
+            if item[0] in ignore_col_list:
                 continue
             # 将列的属性处理成字典的封装形式
-            item_dict = dict([data_process(x) for x in zip(dict_key, item)])
+            item_dict = dict(data_process(zip(dict_key, item)))
             res_list.append(item_dict)
         return res_list

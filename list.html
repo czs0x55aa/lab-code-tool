@@ -1,0 +1,96 @@
+<div ng-class="{'whirl':isLoading,'traditional':isLoading}">
+    <h3>
+        <span class="pull-right">
+            <a class="btn btn-info btn-sm" ui-sref="app.BaseAd.YbTestMain.edit"><i class="fa fa-plus"></i> 新增</a>
+            <a class="btn btn-info btn-sm" ng-click="edit()"><i class="fa fa-edit"></i> 编辑</a>
+            <a class="btn btn-info btn-sm" ng-click="del()"><i class="fa fa-times"></i> 删除</a>
+        </span>
+        YbTestMain
+        <ol class="breadcrumb">
+            <li>基地管理</li>
+            <li class="active">YbTestMain</li>
+        </ol>
+    </h3>
+
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form name="form" class="form-inline">
+                    <div class="form-group">
+                        <label>单据编号</label>
+                        <input type="text" name="ReceiptNum" class="form-control input-sm" ng-model="page.ReceiptNum" />
+                    </div>
+                    <button class="btn btn-primary btn-sm" type="button" ng-click="load()">
+                        <i class="fa" ng-class="{'fa-spinner fa-spin':loading,'fa-search':!loading}"></i> {{loading?'搜索中':'搜索'}}
+                    </button>
+                </form>
+
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped table-bordered table-hover table-condensed" >
+                        <thead>
+                            <tr>
+                                <th>选择</th>
+                                <th>行号</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'DataStatus'" change="load()">数据状态</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'AuditStatus'" change="load()">审核状态</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'AuditDate'" change="load()">审核日期</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'AuditCD'" change="load()">审核人代码</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'AuditName'" change="load()">审核人名称</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'AuditOpinions'" change="load()">AuditOpinions</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'ISO'" change="load()">ISO编号</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'ReceiptNum'" change="load()">单据编号</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'MakingPeople'" change="load()">制单人</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'MakeDate'" change="load()">制单日期</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'SupplyUnit'" change="load()">供货单位</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'SupplyUnitCD'" change="load()">供货单位代码</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'PurchaseBatch'" change="load()">采购批次</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'FirstCheckState'" change="load()">初验是否通过</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'SmokeStatus'" change="load()">评吸是否通过</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'StateName'" change="load()">状态名称</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'LastModifierUserCD'" change="load()">修改人</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-show="list.Data.length< 1">
+                                <td class="text-center" colspan="17">没有数据</td>
+                            </tr>
+                            <tr ng-dblclick="edit(item.ID)" ng-click="item.select==true?item.select=false:item.select=true" ng-hide="list.Data.length< 1" ng-repeat="item in list.Data">
+                                <td clickselect="selected" select="row">
+                                    <div class="checkbox c-checkbox" style="margin:0">
+                                        <label>
+                                            <input type="checkbox" required="" name="checkbox" ng-model="item.select" style="">
+                                            <span class="fa fa-check"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>{{$index+1}}</td>
+                                <td>{{item.DataStatus</td>
+                                <td>{{item.AuditStatus</td>
+                                <td>{{item.AuditDate|date:'yyyy-MM-dd'</td>
+                                <td>{{item.AuditCD</td>
+                                <td>{{item.AuditName</td>
+                                <td>{{item.AuditOpinions</td>
+                                <td>{{item.ISO</td>
+                                <td>{{item.ReceiptNum</td>
+                                <td>{{item.MakingPeople</td>
+                                <td>{{item.MakeDate|date:'yyyy-MM-dd'</td>
+                                <td>{{item.SupplyUnit</td>
+                                <td>{{item.SupplyUnitCD</td>
+                                <td>{{item.PurchaseBatch</td>
+                                <td>{{item.FirstCheckState</td>
+                                <td>{{item.SmokeStatus</td>
+                                <td>{{item.StateName</td>
+                                <td>{{item.LastModifierUserCD</td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center">
+                    <uib-pagination boundary-links="true" total-items="list.TotalCount" items-per-page='list.PageSize' ng-model="list.PageIndex" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" max-size="5" ng-change="load()" class="pagination-sm"></uib-pagination>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

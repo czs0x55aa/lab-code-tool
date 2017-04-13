@@ -31,11 +31,9 @@
                             <tr>
                                 <th>选择</th>
                                 <th>行号</th>
-                                <% for column_info in field_list %>
-                                    <th table-sort by="p.sort" reverse="p.isAsc" order="'<< column_info.col_name >>'" change="load()">
-                                      << column_info.col_comment >>
-                                    </th>
-                                <% endfor %>
+                                <%- for column_info in field_list %>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'<< column_info.col_name >>'" change="load()"><< column_info.col_comment >></th>
+                                <%- endfor %>
                             </tr>
                         </thead>
                         <tbody>
@@ -53,9 +51,9 @@
                                 </td>
                                 <td>{{$index+1}}</td>
 
-                                <% for column_info in field_list %>
-                                    <td>{{item.<< column_info.col_name >><% if column_info.col_type == 'date' %>|date:'yyyy-MM-dd'<% endif %></td> 
-                                <% endfor %>
+                                <%- for column_info in field_list %>
+                                <td>{{item.<< column_info.col_name >><% if column_info.col_type == 'date' %>|date:'yyyy-MM-dd'<% endif %></td>
+                                <%- endfor %>
 
                             </tr>
                         </tbody>

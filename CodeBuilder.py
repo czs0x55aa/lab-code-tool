@@ -28,15 +28,18 @@ config_dict ={
 
 from DBconnect import OracleManager
 if __name__ == '__main__':
-    table_name = 'AnnualProtocol'
+    table_name = 'YbTestMain'
+    base_path = 'YbTest'
     db = OracleManager()
     dict_list = db.get_table_structure(table_name)
     # 封装页面中要渲染的数据
     render_module = {
+        'base_path': base_path,
         'table_name': table_name,
         'field_list': dict_list,
         'list_len': len(dict_list)
     }
     # 创建生成器对象，并输出一个页面
     code_builder = HTMLBuilder(config_dict)
-    code_builder.create_html('list.html', render_module, 'test.html')
+    code_builder.create_html('list.html', render_module, 'list.html')
+    code_builder.create_html('edit.html', render_module, 'edit.html')
