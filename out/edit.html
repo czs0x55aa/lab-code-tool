@@ -1,0 +1,269 @@
+﻿
+<div ng-class="{'whirl':isLoading,'traditional':isLoading}">
+    <form class="form-horizontal w5c-form" w5c-form-validate="validateOptions" role="form" novalidate name="addForm">
+        <h3>
+            <span class="pull-right">
+                <a class="btn btn-info btn-sm" ng-click="addItem();"><i class="fa fa-plus"></i>添加</a>
+                <!--<a class="btn btn-info" ng-click="del()"><i class="fa fa-times"></i> 删除</a>-->
+                <a class="btn btn-info btn-sm" w5c-form-submit="save()"> <i class="fa fa-save"></i> 保存</a>
+                <a class="btn btn-info btn-sm" ng-click="add(0)"><i class="fa fa-check"></i> 提交</a>
+                <a class="btn btn-info btn-sm" ng-click="report()"><i class="fa fa-file-text-o"></i> 报表</a>
+                <a class="btn btn-info btn-sm" ng-click="excel()"><i class="fa fa-file-excel-o"></i> 导出</a>
+            </span>
+                 YbTestMain
+             <ol class="breadcrumb">
+                <li>基地管理</li>
+                <li>
+                    <a ui-sref="app.YbTest.YbTestMain.list">
+                        YbTestMain
+                    </a>
+                </li>
+                <li class="active">编辑</li>
+            </ol>
+        </h3>
+
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right"></label>
+                                <div class="col-lg-8">
+                                    <input type="text" ng-model="d.DataStatus" popover-trigger="focus" popover="{{errorMessage.DataStatus}}" name="DataStatus" class="form-control  input-sm" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right"></label>
+                                <div class="col-lg-8">
+                                    <input type="text" ng-model="d.AuditStatus" popover-trigger="focus" popover="{{errorMessage.AuditStatus}}" name="AuditStatus" class="form-control  input-sm" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right"></label>
+                                <div class="col-lg-8">
+                                    <input type="text" ng-model="d.AuditDate" popover-trigger="focus" popover="{{errorMessage.AuditDate}}" name="AuditDate" class="form-control  input-sm" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right"></label>
+                                <div class="col-lg-8">
+                                    <input type="text" ng-model="d.AuditCD" popover-trigger="focus" popover="{{errorMessage.AuditCD}}" name="AuditCD" class="form-control  input-sm" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right"></label>
+                                <div class="col-lg-8">
+                                    <input type="text" ng-model="d.AuditName" popover-trigger="focus" popover="{{errorMessage.AuditName}}" name="AuditName" class="form-control  input-sm" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right"></label>
+                                <div class="col-lg-8">
+                                    <input type="text" ng-model="d.AuditOpinions" popover-trigger="focus" popover="{{errorMessage.AuditOpinions}}" name="AuditOpinions" class="form-control  input-sm" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right"></label>
+                                <div class="col-lg-8">
+                                    <input type="text" ng-model="d.ISO" popover-trigger="focus" popover="{{errorMessage.ISO}}" name="ISO" class="form-control  input-sm" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right"></label>
+                                <div class="col-lg-8">
+                                    <input type="text" ng-model="d.ReceiptNum" popover-trigger="focus" popover="{{errorMessage.ReceiptNum}}" name="ReceiptNum" class="form-control  input-sm" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right"></label>
+                                <div class="col-lg-8">
+                                    <input type="text" ng-model="d.MakingPeople" popover-trigger="focus" popover="{{errorMessage.MakingPeople}}" name="MakingPeople" class="form-control  input-sm" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right"></label>
+                                <div class="col-lg-8">
+                                    <input type="text" ng-model="d.MakeDate" popover-trigger="focus" popover="{{errorMessage.MakeDate}}" name="MakeDate" class="form-control  input-sm" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right"></label>
+                                <div class="col-lg-8">
+                                    <input type="text" ng-model="d.SupplyUnit" popover-trigger="focus" popover="{{errorMessage.SupplyUnit}}" name="SupplyUnit" class="form-control  input-sm" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right"></label>
+                                <div class="col-lg-8">
+                                    <input type="text" ng-model="d.SupplyUnitCD" popover-trigger="focus" popover="{{errorMessage.SupplyUnitCD}}" name="SupplyUnitCD" class="form-control  input-sm" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right"></label>
+                                <div class="col-lg-8">
+                                    <input type="text" ng-model="d.PurchaseBatch" popover-trigger="focus" popover="{{errorMessage.PurchaseBatch}}" name="PurchaseBatch" class="form-control  input-sm" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right"></label>
+                                <div class="col-lg-8">
+                                    <input type="text" ng-model="d.FirstCheckState" popover-trigger="focus" popover="{{errorMessage.FirstCheckState}}" name="FirstCheckState" class="form-control  input-sm" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right"></label>
+                                <div class="col-lg-8">
+                                    <input type="text" ng-model="d.SmokeStatus" popover-trigger="focus" popover="{{errorMessage.SmokeStatus}}" name="SmokeStatus" class="form-control  input-sm" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right"></label>
+                                <div class="col-lg-8">
+                                    <input type="text" ng-model="d.StateName" popover-trigger="focus" popover="{{errorMessage.StateName}}" name="StateName" class="form-control  input-sm" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right"></label>
+                                <div class="col-lg-8">
+                                    <input type="text" ng-model="d.LastModifierUserCD" popover-trigger="focus" popover="{{errorMessage.LastModifierUserCD}}" name="LastModifierUserCD" class="form-control  input-sm" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="panel panel-default">
+            <!--<div class="panel-heading">面板标题</div>-->
+            <div class="panel-body">
+                <form name="form" class="form-inline">
+                    <div class="form-group">
+                        <label>标题</label>
+                        <input type="text" name="Title" class="form-control input-sm" ng-model="p.Title" />
+                    </div>
+                    <button class="btn btn-primary btn-sm" type="button" ng-click="load()">
+                        <i class="fa" ng-class="{'fa-spinner fa-spin':loading,'fa-search':!loading}"></i> {{loading?'搜索中':'搜索'}}
+                    </button>
+                </form>
+
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped table-bordered table-hover table-condensed">
+                        <thead>
+                            <tr>
+                                <th>操作</th>
+                                <th>行号</th>
+                                <th>数据状态</th>
+                                <th>审核状态</th>
+                                <th>审核日期</th>
+                                <th>审核人代码</th>
+                                <th>审核人名称</th>
+                                <th>AuditOpinions</th>
+                                <th>ISO编号</th>
+                                <th>单据编号</th>
+                                <th>制单人</th>
+                                <th>制单日期</th>
+                                <th>供货单位</th>
+                                <th>供货单位代码</th>
+                                <th>采购批次</th>
+                                <th>初验是否通过</th>
+                                <th>评吸是否通过</th>
+                                <th>状态名称</th>
+                                <th>修改人</th>
+                               
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-show="d.YbTestMain.length< 1">
+                                <td class="text-center" colspan="17">没有数据</td>
+                            </tr>
+                            <tr ng-dblclick="rowform.$visible==false?rowform.$show():rowform.$submit()" ng-hide="d.YbTestMain.length< 1" ng-repeat="item in d.">
+                                <td style="white-space: nowrap">                                  
+                                    <form editable-form="" name="rowform" onbeforesave="" ng-show="rowform.$visible" shown="inserted == item" class="form-buttons form-inline">
+                                        <button type="submit" ng-disabled="rowform.$waiting" title="Save" class="btn btn-xs btn-info">
+                                            <em class="fa fa-save"></em>
+                                        </button>
+                                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" title="Cancel" class="btn btn-xs btn-default">
+                                            <em class="fa fa-times"></em>
+                                        </button>
+                                    </form>
+                                    <div ng-show="!rowform.$visible" class="buttons">
+                                        <button ng-click="rowform.$show()" title="Edit" class="btn btn-xs btn-info">
+                                            <em class="fa fa-pencil"></em>
+                                        </button>
+                                        <button ng-click="removeItem($index,item.ID)" title="Delete" class="btn btn-xs btn-danger">
+                                            <em class="fa fa-trash"></em>
+                                        </button>
+                                    </div>
+                                </td>
+                                <td>{{$index+1}}</td>
+                                <td><span editable-text="item.DataStatus" e-name="DataStatus" e-form="rowform" e-required="">{{ item.DataStatus }}</span></td>
+                                <td><span editable-text="item.AuditStatus" e-name="AuditStatus" e-form="rowform" e-required="">{{ item.AuditStatus }}</span></td>
+                                <td><span editable-text="item.AuditDate" e-name="AuditDate" e-form="rowform" e-required="">{{ item.AuditDate }}</span></td>
+                                <td><span editable-text="item.AuditCD" e-name="AuditCD" e-form="rowform" e-required="">{{ item.AuditCD }}</span></td>
+                                <td><span editable-text="item.AuditName" e-name="AuditName" e-form="rowform" e-required="">{{ item.AuditName }}</span></td>
+                                <td><span editable-text="item.AuditOpinions" e-name="AuditOpinions" e-form="rowform" e-required="">{{ item.AuditOpinions }}</span></td>
+                                <td><span editable-text="item.ISO" e-name="ISO" e-form="rowform" e-required="">{{ item.ISO }}</span></td>
+                                <td><span editable-text="item.ReceiptNum" e-name="ReceiptNum" e-form="rowform" e-required="">{{ item.ReceiptNum }}</span></td>
+                                <td><span editable-text="item.MakingPeople" e-name="MakingPeople" e-form="rowform" e-required="">{{ item.MakingPeople }}</span></td>
+                                <td><span editable-text="item.MakeDate" e-name="MakeDate" e-form="rowform" e-required="">{{ item.MakeDate }}</span></td>
+                                <td><span editable-text="item.SupplyUnit" e-name="SupplyUnit" e-form="rowform" e-required="">{{ item.SupplyUnit }}</span></td>
+                                <td><span editable-text="item.SupplyUnitCD" e-name="SupplyUnitCD" e-form="rowform" e-required="">{{ item.SupplyUnitCD }}</span></td>
+                                <td><span editable-text="item.PurchaseBatch" e-name="PurchaseBatch" e-form="rowform" e-required="">{{ item.PurchaseBatch }}</span></td>
+                                <td><span editable-text="item.FirstCheckState" e-name="FirstCheckState" e-form="rowform" e-required="">{{ item.FirstCheckState }}</span></td>
+                                <td><span editable-text="item.SmokeStatus" e-name="SmokeStatus" e-form="rowform" e-required="">{{ item.SmokeStatus }}</span></td>
+                                <td><span editable-text="item.StateName" e-name="StateName" e-form="rowform" e-required="">{{ item.StateName }}</span></td>
+                                <td><span editable-text="item.LastModifierUserCD" e-name="LastModifierUserCD" e-form="rowform" e-required="">{{ item.LastModifierUserCD }}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>              
+            </div>
+        </div>
+
+    </div>
+</div>
