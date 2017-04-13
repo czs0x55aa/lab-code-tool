@@ -28,7 +28,9 @@ config_dict ={
 
 from DBconnect import OracleManager
 if __name__ == '__main__':
+    # 表名
     table_name = 'YbTestMain'
+    # 子模块目录
     base_path = 'YbTest'
     db = OracleManager()
     dict_list = db.get_table_structure(table_name)

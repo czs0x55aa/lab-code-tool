@@ -53,17 +53,6 @@ class OracleManager(object):
         re_data_type = re.compile('([A-z]+)')
 
         # 根据键名执行相应的数据处理
-        # def data_process(element):
-        #     key, val = element
-        #     if key == 'col_type':
-        #         tf_key = re_data_type.findall(val)[0]
-        #         return [key, type_transform[tf_key]]
-        #     elif key == 'col_comment':
-        #         print key, val
-        #         return [key, val if val == None else val.decode('utf8')]
-        #     else:
-        #         return list(element)
-
         def data_process(element):
             return_list = {}
             for item in element:
@@ -72,6 +61,7 @@ class OracleManager(object):
                     tf_key = re_data_type.findall(val)[0]
                     return_list[key] = type_transform[tf_key]
                 elif key == 'col_comment':
+                    # 若comment为空，则comment等于col_name
                     return_list[key] = element[0][1] if val is None else val.decode('utf-8')
                 else:
                     return_list[key] = val
