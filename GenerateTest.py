@@ -5,7 +5,7 @@ from CodeBuilder import HTMLBuilder
 from DataPacker import SimplePacker
 
 # 表名
-table_name = 'DicCountry'
+table_name = 'BakePeriodStatus'
 # 子模块目录
 base_path = 'YbTest'
 # 输出目录
@@ -25,13 +25,16 @@ if __name__ == '__main__':
     # 创建打包器，封装表结构
     simple_packer = SimplePacker(db)
     table_dict_list = simple_packer.pack_single_table(table_name)
+    detail_dict_list = simple_packer.pack_single_table(table_name + 'Detail')
     # 封装页面中要渲染的数据
     render_module = {
         'base_path': base_path,
         'table_name': table_name,
         'table_name_zh': db.get_table_comment(table_name),
         'field_list': table_dict_list,
-        'list_len': len(table_dict_list)
+        'detail_field_list': detail_dict_list,
+        'list_len': len(table_dict_list),
+        'detail_list_len': 0 if detail_dict_list is None else len(detail_dict_list)
     }
     # 创建生成器对象
     code_builder = HTMLBuilder()
@@ -39,6 +42,6 @@ if __name__ == '__main__':
         code_builder.create_html(file, render_module, output_dir + file)
 
     # 指定要使用的模板
-    template_pages = ['list.html', 'edit.html', 'controller.js', 'dicserver.js', 'route.js', 'server.js']
+    template_pages = ['list.html', 'edit.html' if detail_dict_list is None else 'mutiple_edit.html', 'controller.js', 'dicserver.js', 'route.js', 'server.js']
     for page_name in template_pages:
         out_html(page_name)

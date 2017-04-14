@@ -11,7 +11,7 @@ class SimplePacker(BasePacker):
         structure_list = self.db.get_table_structure(table_name)
         # 检查查询结果是否为空
         if structure_list is None:
-            raise Exception('Table %s query failed.' % table_name)
+            return None
         # 定义要过滤掉的字段名
         ignore_col_list = ['ID', 'IsDeleted', 'DeleterUserCD', 'DeletionTime', 'LastModificationTime', 'CreationTime', 'CreatorUserCD']
         # 用于封装的键名
