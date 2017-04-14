@@ -28,7 +28,8 @@ if __name__ == '__main__':
     # 封装页面中要渲染的数据
     render_module = {
         'base_path': base_path,
-        'table_name': db.get_table_comment(table_name),
+        'table_name': table_name,
+        'table_name_zh': db.get_table_comment(table_name),
         'field_list': table_dict_list,
         'list_len': len(table_dict_list)
     }

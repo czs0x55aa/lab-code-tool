@@ -32,13 +32,11 @@ class OracleManager(object):
         """
         query_sql = "select comments from user_tab_comments where table_name='%s'" % table_name
         query_res = self.execute_sql(query_sql)
-        if len(query_res) == 0:
-            # 该表不存在
-            return 'Unknown'
-        if query_res[0][0] is None:
-            # 该表没有备注，则返回表明
-            return table_name
-        return query_res[0][0].decode('utf8')
+        if len(query_res) > 0 and query_res[0][0] is not None:
+            # 存在备注名则返回备注
+            return query_res[0][0].decode('utf8')
+        # 没有备注的情况返回英文表名
+        return table_name
 
     def get_table_structure(self, table_name):
         """
