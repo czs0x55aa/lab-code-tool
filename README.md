@@ -11,8 +11,13 @@ PS：cx_Oracle安装比较容易出问题，建议使用Anconda的conda进行安
 lab-code-tool/  
 ├── templates/              页面模板
 │     └── ...  
-├── CodeBuilder.py          代码生成主程序
+├── CodeBuilder.py          代码生成与输出
 ├── DBconnect.py            数据库连接和基本查询
 ├── DataPacker.py           对数据进行自定义的封装
+├── GenerateTest.py         代码生成测试
 └── README.md
+```
+## 执行
+```python
+python GenerateTest.py
 ```
