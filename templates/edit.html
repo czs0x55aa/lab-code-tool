@@ -68,7 +68,7 @@
                                 <%- for column_info in field_list %>
                                 <th><< column_info.col_comment >></th>
                                 <%- endfor %>
-                               
+
                             </tr>
                         </thead>
                         <tbody>
@@ -76,7 +76,7 @@
                                 <td class="text-center" colspan="<< list_len >>">没有数据</td>
                             </tr>
                             <tr ng-dblclick="rowform.$visible==false?rowform.$show():rowform.$submit()" ng-hide="d.<< table_name >>.length< 1" ng-repeat="item in d.<#= host.TableName #>">
-                                <td style="white-space: nowrap">                                  
+                                <td style="white-space: nowrap">
                                     <form editable-form="" name="rowform" onbeforesave="" ng-show="rowform.$visible" shown="inserted == item" class="form-buttons form-inline">
                                         <button type="submit" ng-disabled="rowform.$waiting" title="Save" class="btn btn-xs btn-info">
                                             <em class="fa fa-save"></em>
@@ -101,7 +101,7 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>              
+                </div>
             </div>
         </div>
 

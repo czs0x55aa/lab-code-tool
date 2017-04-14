@@ -16,7 +16,7 @@ class HTMLBuilder(CodeBuilder):
         return render_res
 
 
-# 模板引擎的配置文件
+# 模板引擎的配置参数
 config_dict ={
     'loader': FileSystemLoader('./templates'),
     'block_start_string': '<%',
@@ -28,19 +28,22 @@ config_dict ={
 }
 
 from DBconnect import OracleManager
+from DataPacker import SimplePacker
 if __name__ == '__main__':
     # 表名
     table_name = 'YbTestMain'
     # 子模块目录
     base_path = 'YbTest'
     db = OracleManager()
-    dict_list = db.get_table_structure(table_name)
+    # 创建打包器，并封装表格式
+    simple_packer = SimplePacker(db)
+    table_dict_list = simple_packer.pack_single_table(table_name)
     # 封装页面中要渲染的数据
     render_module = {
         'base_path': base_path,
-        'table_name': table_name,
-        'field_list': dict_list,
-        'list_len': len(dict_list)
+        'table_name': db.get_table_comment(table_name),
+        'field_list': table_dict_list,
+        'list_len': len(table_dict_list)
     }
     # 创建生成器对象，并输出一个页面
     code_builder = HTMLBuilder(config_dict)
