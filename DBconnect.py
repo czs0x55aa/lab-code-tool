@@ -38,7 +38,7 @@ class OracleManager(object):
         if query_res[0][0] is None:
             # 该表没有备注，则返回表明
             return table_name
-        return query_res[0][0]
+        return query_res[0][0].decode('utf8')
 
     def get_table_structure(self, table_name):
         """

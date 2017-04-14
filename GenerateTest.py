@@ -5,7 +5,7 @@ from CodeBuilder import HTMLBuilder
 from DataPacker import SimplePacker
 
 # 表名
-table_name = 'YbTestMain'
+table_name = 'AnnualProtocol'
 # 子模块目录
 base_path = 'YbTest'
 # 输出目录
