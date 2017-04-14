@@ -16,7 +16,7 @@
             method: 'Post',
             url: host + '/api/<< base_path >>/<< table_name >>/deletes'
         },
-        <% if 'Dic' in table_name %>
+        <%- if 'Dic' in table_name %>
         DeleteDetail: {
             method: 'Delete',
             url: host + '/api/<< base_path >>/<< table_name >>/deleteDetail'
@@ -25,6 +25,6 @@
             method: 'Post',
             url: host + '/api/<< base_path >>/<< table_name >>/deleteDetails'
         },
-        <% endif %>
+        <%- endif %>
     });
 }])
