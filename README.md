@@ -1,6 +1,6 @@
 # lab-code-tool
-实验室项目前端页面生成工具
-
+实验室项目前端页面生成工具  
+PS：cx_Oracle安装比较容易出问题，建议使用Anconda的conda进行安装
 ## 依赖
 - python 2.7
 - cx_Oracle
@@ -8,7 +8,7 @@
 
 ## 目录结构
 ```
-HUAWEI-CodeCraft-2017/  
+lab-code-tool/  
 ├── templates/              页面模板
 │     └── ...  
 ├── CodeBuilder.py          代码生成主程序
