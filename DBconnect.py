@@ -44,7 +44,7 @@ class OracleManager(object):
         """
         # 两张表的联合查询语句
         query_sql = """
-            select user_tab_columns.column_name, user_tab_columns.data_type, user_col_comments.comments, user_tab_columns.data_length, user_tab_columns.data_scale
+            select user_tab_columns.column_name, user_tab_columns.data_type, user_col_comments.comments, user_tab_columns.data_length, user_tab_columns.data_precision, user_tab_columns.data_scale
             from user_tab_columns
             left join user_col_comments on user_tab_columns.column_name = user_col_comments.column_name
             WHERE user_tab_columns.table_name='%s' and user_col_comments.table_name=user_tab_columns.table_name
