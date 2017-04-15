@@ -17,10 +17,16 @@ def update_comment():
         'AuditStatus': u'审计状态',
         'MakeDate': u'制单日期',
         'IsDeleted': u'是否删除',
-        'DeleterUserCD': u'',
-        'DeletionTime': u'',
+        'DeleterUserCD': u'删除代码',
+        'DeletionTime': u'删除时间',
         'LastModificationTime': u'修改时间',
-        'LastModiferUserCD': u''
+        'LastModiferUserCD': u'修改人',
+        'CreationTime': u'创建时间',
+        'CreatorUserCD': u'创建者',
+        'AuditTime': u'审核日期',
+        'AuditCD': u'审核人代码',
+        'AuditName': u'审核人',
+        'AuditOpinion': u'审核意见'
     }
     for table_name in table_name_list:
         for field, comment in field_comment_dict.items():
@@ -32,7 +38,9 @@ def update_comment():
 def update_field_name():
     """ 更新字段名称 """
     field_name_dict = {
-        'DocDate': 'MakeDate'
+        'DocDate': 'MakeDate',
+        'LastModifierUserId': 'LastModifierUserCD',
+        'PurchaseBatchNo': 'PurchaseBatch'
     }
     for table_name in table_name_list:
         for old_name, new_name in field_name_dict.items():
@@ -43,9 +51,19 @@ def update_field_name():
 
 def delete_field_name():
     """ 删除字段 """
-    del_field = ['AuditDate', 'AuthorName', 'AuditOpinions']
+    # del_field = ['AuditDate', 'AuthorName', 'AuditOpinions', 'SerialNum']
+    # for table_name in table_name_list:
+    #     for field in del_field:
+    #         if sql_tool.table_has_field(table_name, field):
+    #             sql_tool.del_field(table_name, field)
+
+    # 删除从表中的下列字段
+    detail_del_list = ['AuditTime', 'AuditCD', 'AuditName', 'AuditOpinion']
     for table_name in table_name_list:
-        for field in del_field:
+        # 忽略从表以外的表
+        if table_name.find('Detail') == -1:
+            continue
+        for field in detail_del_list:
             if sql_tool.table_has_field(table_name, field):
                 sql_tool.del_field(table_name, field)
 
@@ -57,17 +75,36 @@ def add_field():
         'DeleterUserCD': ('VARCHAR2(20)', ''),
         'DeletionTime': ('TIMESTAMP', ''),
         'LastModificationTime': ('TIMESTAMP', ''),
-        'LastModiferUserCD': ('VARCHAR2(20)', ''),
+        'LastModifierUserCD': ('VARCHAR2(20)', ''),
         'CreationTime': ('TIMESTAMP', ''),
-        'CreateorUserCD': ('VARCHAR2(20)', ''),
+        'CreatorUserCD': ('VARCHAR2(20)', ''),
         'AuditTime': ('TIMESTAMP', ''),
         'AuditCD': ('VARCHAR2(20)', ''),
         'AuditName': ('VARCHAR2(20)', ''),
-        'AuditOpinion': ('VARCHAR2(200)', '')
+        'AuditOpinion': ('VARCHAR2(500)', ''),
+        'DataStatus': ('NUMBER(2)', 'default 0'),
+        'AuditStatus': ('NUMBER(2)', 'default 0'),
     }
     for table_name in table_name_list:
-        for
+        for field, ele in add_field_dict.items():
+            # 检查是否不存在这个字段
+            if not sql_tool.table_has_field(table_name, field):
+                # 添加该字段
+                sql_tool.update_field_type(table_name, field, ele[0], ele[1], op='add')
+
+def modify_field():
+    modify_dict = {
+        'IsDeleted': ('NUMBER(2)', 'default 0')
+    }
+    for table_name in table_name_list:
+        for field, ele in modify_dict.items():
+            # 检查是否存在该字段
+            if sql_tool.table_has_field(table_name, field):
+                # 修改该字段
+                sql_tool.update_field_type(table_name, field, ele[0], ele[1], op='modify')
+
+
 
 if __name__ == '__main__':
 
-    update_field_name()
+    delete_field_name()
