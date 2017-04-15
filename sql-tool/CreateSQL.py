@@ -15,7 +15,12 @@ def update_comment():
     field_comment_dict = {
         'DataStatus': u'数据状态',
         'AuditStatus': u'审计状态',
-        'MakeDate': u'制单日期'
+        'MakeDate': u'制单日期',
+        'IsDeleted': u'是否删除',
+        'DeleterUserCD': u'',
+        'DeletionTime': u'',
+        'LastModificationTime': u'修改时间',
+        'LastModiferUserCD': u''
     }
     for table_name in table_name_list:
         for field, comment in field_comment_dict.items():
@@ -42,12 +47,27 @@ def delete_field_name():
     for table_name in table_name_list:
         for field in del_field:
             if sql_tool.table_has_field(table_name, field):
-                sql_tool.delete_field_name(table_name, field)
+                sql_tool.del_field(table_name, field)
+
+
+def add_field():
+    """ 添加字段 """
+    add_field_dict = {
+        "IsDeleted": ('NUMBER(2)', 'default 0'),
+        'DeleterUserCD': ('VARCHAR2(20)', ''),
+        'DeletionTime': ('TIMESTAMP', ''),
+        'LastModificationTime': ('TIMESTAMP', ''),
+        'LastModiferUserCD': ('VARCHAR2(20)', ''),
+        'CreationTime': ('TIMESTAMP', ''),
+        'CreateorUserCD': ('VARCHAR2(20)', ''),
+        'AuditTime': ('TIMESTAMP', ''),
+        'AuditCD': ('VARCHAR2(20)', ''),
+        'AuditName': ('VARCHAR2(20)', ''),
+        'AuditOpinion': ('VARCHAR2(200)', '')
+    }
+    for table_name in table_name_list:
+        for
 
 if __name__ == '__main__':
 
-    for table_name in table_name_list:
-        if sql_tool.table_has_field(table_name, 'AuditDate'):
-            print table_name
-            sql_tool.del_field(table_name, 'AuditDate')
-            break
+    update_field_name()
