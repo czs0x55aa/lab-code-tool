@@ -13,7 +13,9 @@
             </span>
                  << table_name_zh >>
              <ol class="breadcrumb">
-                <li>基地管理</li>
+                <li>
+                    << base_path_name >>
+                </li>
                 <li>
                     <a ui-sref="app.<< base_path >>.<< table_name >>.list">
                         << table_name_zh >>
@@ -32,7 +34,7 @@
                             <div class="form-group">
                                 <label class="col-lg-4 control-label text-right"><< column_info.col_comment >></label>
                                 <div class="col-lg-8">
-                                    <input <%- if 'DataStatus' in column_info %>ng-readonly="d.DataStatus>=2" <%- endif %> type="text" ng-model="d.<< column_info.col_name >>" popover-trigger="focus" popover="{{errorMessage.<< column_info.col_name >>}}" name="<< column_info.col_name >>" class="form-control  input-sm" required>
+                                    <input ng-readonly="d.DataStatus>=2" type="text" ng-model="d.<< column_info.col_name >>" popover-trigger="focus" popover="{{errorMessage.<< column_info.col_name >>}}" name="<< column_info.col_name >>" class="form-control  input-sm" required>
                                 </div>
                             </div>
                         </div>

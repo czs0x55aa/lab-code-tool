@@ -3,16 +3,19 @@
     <form class="form-horizontal w5c-form" w5c-form-validate="validateOptions" role="form" novalidate name="addForm">
         <h3>
             <span class="pull-right">
-                <a class="btn btn-info btn-sm" ng-click="addItem();"><i class="fa fa-plus"></i>添加</a>
-                <!--<a class="btn btn-info" ng-click="del()"><i class="fa fa-times"></i> 删除</a>-->
-                <a class="btn btn-info btn-sm" w5c-form-submit="save()"> <i class="fa fa-save"></i> 保存</a>
-                <a class="btn btn-info btn-sm" ng-click="add(0)"><i class="fa fa-check"></i> 提交</a>
+                <a ng-show="d.DataStatus<2" class="btn btn-info btn-sm" ng-click="addItem();"><i class="fa fa-plus"></i>添加</a>
+                <a ng-show="d.DataStatus<2" class="btn btn-info btn-sm" w5c-form-submit="save()"> <i class="fa fa-save"></i> 保存</a>
+                <a ng-show="d.DataStatus<2" class="btn btn-info btn-sm" ng-click="confirm()"><i class="fa fa-check"></i> 提交</a>
+                <a ng-show="d.DataStatus==2" class="btn btn-info btn-sm" ng-click="check(2)"><i class="fa fa-pencil"></i> 审核</a>
+                <a ng-show="d.DataStatus==2" class="btn btn-info btn-sm" ng-click="check(1)"><i class="fa fa-reply"></i> 审核不通过</a>
                 <a class="btn btn-info btn-sm" ng-click="report()"><i class="fa fa-file-text-o"></i> 报表</a>
                 <a class="btn btn-info btn-sm" ng-click="excel()"><i class="fa fa-file-excel-o"></i> 导出</a>
             </span>
                  << table_name_zh >>
              <ol class="breadcrumb">
-                <li>基地管理</li>
+                <li>
+                    << base_path_name >>
+                </li>
                 <li>
                     <a ui-sref="app.<< base_path >>.<< table_name >>.list">
                         << table_name_zh >>
@@ -31,7 +34,18 @@
                             <div class="form-group">
                                 <label class="col-lg-4 control-label text-right"><< column_info.col_comment >></label>
                                 <div class="col-lg-8">
-                                    <input type="text" ng-model="d.<< column_info.col_name >>" popover-trigger="focus" popover="{{errorMessage.<< column_info.col_name >>}}" name="<< column_info.col_name >>" class="form-control  input-sm" required>
+                                    <%- if column_info.col_type == 'date' %>
+                                    <input  ng-readonly="d.DataStatus>=2" type="text" converttodate="yyyy-MM-dd" ng-model="d.<< column_info.col_name >>" popover-trigger="focus"  ng-disabled="{{disable}}" popover="{{errorMessage.<< column_info.col_name >>}}" name="<< column_info.col_name >>" class="form-control  input-sm" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd', maxDate: new Date() })" onchange="">
+                                    <%- elif column_info.col_type == 'enum'%>
+                                    <%- if column_info.col_name != 'AuditStatus' %>
+                                    {{ d.<< column_info.col_name >>|enum:'EnumOneAuditStatusType'}}
+                                    <%- else %>
+                                    {{ d.AuditStatus|enum:'EnumOneAuditStatusType'}}
+                                    <a ng-show="d.AuditStatus>0" class="btn btn-green btn-xs" ng-click="showAudit(d.FID)"><i class="fa fa-commenting-o"></i> </a>
+                                    <%- endif %>
+                                    <%- else %>
+                                    <input ng-readonly="d.DataStatus>=2" type="text" ng-model="d.<< column_info.col_name >>" popover-trigger="focus" popover="{{errorMessage.<< column_info.col_name >>}}" name="<< column_info.col_name >>" class="form-control  input-sm" required>
+                                    <%- endif %>
                                 </div>
                             </div>
                         </div>
@@ -63,7 +77,7 @@
                     <table class="table table-sm table-striped table-bordered table-hover table-condensed">
                         <thead>
                             <tr>
-                                <th>操作</th>
+                                <th ng-show="d.DataStatus<2">操作</th>
                                 <th>行号</th>
                                 <%- for column_info in detail_field_list %>
                                 <th><< column_info.col_comment >></th>
@@ -72,11 +86,11 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-show="d.<< table_name >>.length< 1">
-                                <td class="text-center" colspan="<< list_len >>">没有数据</td>
+                            <tr ng-show="d.<< table_name >>Detail.length< 1">
+                                <td class="text-center" colspan="<< detail_list_len >>">没有数据</td>
                             </tr>
-                            <tr ng-dblclick="rowform.$visible==false?rowform.$show():rowform.$submit()" ng-hide="d.<< table_name >>.length< 1" ng-repeat="item in d.<#= host.TableName #>">
-                                <td style="white-space: nowrap">
+                            <tr ng-dblclick="rowform.$visible==false?rowform.$show():rowform.$submit()" ng-hide="d.<< table_name >>Detail.length< 1" ng-repeat="item in d.<< table_name >>Detail">
+                                <td ng-show="d.DataStatus<2" style="white-space: nowrap">
                                     <form editable-form="" name="rowform" onbeforesave="" ng-show="rowform.$visible" shown="inserted == item" class="form-buttons form-inline">
                                         <button type="submit" ng-disabled="rowform.$waiting" title="Save" class="btn btn-xs btn-info">
                                             <em class="fa fa-save"></em>

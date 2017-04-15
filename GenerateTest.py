@@ -10,6 +10,8 @@ from DataPacker import SimplePacker
 output_dir = 'out/'
 # 子模块目录
 base_path = 'YbTest'
+# 子模块名称
+base_path_name = u'前台测试'
 # 该模块块下的数据表名
 table_list = ['BakePeriodStatus']
 
@@ -36,6 +38,7 @@ if __name__ == '__main__':
         # 封装页面中要渲染的数据
         render_module = {
             'base_path': base_path,
+            'base_path_name': base_path_name,
             'table_name': table_name,
             'table_name_zh': db.get_table_comment(table_name),
             'field_list': table_dict_list,
