@@ -31,7 +31,11 @@ class SimplePacker(BasePacker):
                 key, val = item
                 if key == 'col_type':
                     tf_key = re_data_type.findall(val)[0]
-                    return_list[key] = type_transform[tf_key]
+                    if tf_key == 'NUMBER' and element[3][1] == 2:
+                        # 如果该字段是NUMBER(2)则设为枚举类型
+                        return_list[key] = 'enum'
+                    else:
+                        return_list[key] = type_transform[tf_key]
                 elif key == 'col_comment':
                     # 若comment为空，则comment等于col_name
                     return_list[key] = element[0][1] if val is None else val.decode('utf-8')

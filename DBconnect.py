@@ -53,3 +53,65 @@ class OracleManager(object):
         if len(query_res) == 0:
             return None
         return query_res
+
+
+db_namespace = 'GXZY_USER'
+class SQLTool(OracleManager):
+    def get_all_tables_name(self):
+        """
+        查询所有的表名
+        """
+        query_sql = "select table_name from user_tables"
+        query_res = self.execute_sql(query_sql)
+        return [x[0] for x in query_res]
+
+    def table_has_field(self, table_name, field_name):
+        """
+        检查表中是否有这个字段名
+        """
+        query_sql = "select column_name from user_tab_columns where table_name='%s'" % table_name
+        query_res = self.execute_sql(query_sql)
+        # 检查表结构中是否有这个字段
+        if field_name in [x[0] for x in query_res]:
+            return True
+        return False
+
+    def add_field_comment(self, table_name, field_name, comment):
+        """
+        给数据表中的一个字段添加备注
+        """
+        comment_sql = "comment on column \"%s\".\"%s\" is '%s'" % (table_name, field_name, comment)
+        self.cursor.execute(comment_sql)
+
+    def update_field_name(self, table_name, old_field, new_field):
+        """
+        修改数据表中的一个字段名
+        """
+        alter_sql = "alter table \"%s\" rename column \"%s\" to \"%s\"" % (table_name, old_field, new_field)
+        self.cursor.execute(alter_sql)
+
+    def update_field_type(self, table_name, field_name, type_str, default_str=None):
+        """
+        修改数据表中的一个字段类型
+        """
+        alter_sql = "alter table \"%s\" modify \"%s\" %s " % (table_name, field_name, type_str)
+        if default_str is not None:
+            alter_sql += default_str
+        # 为了避免表中有数据无法改字段类型，先清空表中数据
+        self.table_clear(table_name)
+        # 修改字段类型
+        self.cursor.execute(alter_sql)
+
+    def del_field(self, table_name, field_name):
+        """
+        删除表中的一个字段
+        """
+        alter_sql = "alter table \"%s\" drop column \"%s\"" % (table_name, field_name)
+        self.cursor.execute(alter_sql)
+
+    def table_clear(self, table_name):
+        """
+        清空表中的数据
+        """
+        delete_sql = "delete from \"%s\"" % table_name
+        self.cursor.execute(delete_sql)
