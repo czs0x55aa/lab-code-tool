@@ -11,7 +11,7 @@ output_dir = 'out/'
 # 子模块目录
 base_path = 'YbTest'
 # 该模块块下的数据表名
-table_list = ['BakePeriodStatus', 'CaboStockQuality']
+table_list = ['BakePeriodStatus']
 
 if __name__ == '__main__':
     # 清理 新建 output directory

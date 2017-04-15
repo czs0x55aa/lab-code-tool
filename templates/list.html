@@ -18,7 +18,19 @@
                 <form name="form" class="form-inline">
                     <div class="form-group">
                         <label>单据编号</label>
-                        <input type="text" name="ReceiptNum" class="form-control input-sm" ng-model="page.ReceiptNum" />
+                        <input type="text" name="ReceiptNum" class="form-control input-sm txtsearch" ng-model="p.ReceiptNum" />
+                    </div>
+                    <div class="form-group">
+                        <label>审核</label>
+                        <select name="DataStatus" ng-model="p.AuditStatus" class="form-control input-sm ">
+                            <option selected="selected" value="">请选择</option>
+                            <option ng-repeat="(k,v) in enums['EnumOneAuditStatusType']" value="{{k}}">{{v}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>制单日期</label>
+                        <input type="text" ng-model="p.start" name="beginDate" ng-disabled="disable" placeholder="开始日期" id="time" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'})" class="form-control txtdate" onchange="">
+                        <input type="text" ng-model="p.end" name="endDate" placeholder="结束日期"  ng-disabled="disable" id="time1" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'})" class="form-control txtdate" onchange="">
                     </div>
                     <button class="btn btn-primary btn-sm" type="button" ng-click="load()">
                         <i class="fa" ng-class="{'fa-spinner fa-spin':loading,'fa-search':!loading}"></i> {{loading?'搜索中':'搜索'}}
@@ -50,11 +62,15 @@
                                     </div>
                                 </td>
                                 <td>{{$index+1}}</td>
-
                                 <%- for column_info in field_list %>
-                                <td>{{ item.<< column_info.col_name >><% if column_info.col_type == 'date' %>|date:'yyyy-MM-dd'<% endif %> }}</td>
+                                <td <%- if column_info.col_name in ['DataStatus', 'AuditStatus'] %> ng-class="{'text-danger':item.<< column_info.col_name >>==1}"
+                                    <%- endif %>>{{ item.<< column_info.col_name >>
+                                    <%- if column_info.col_type == 'date' %>|date:'yyyy-MM-dd'
+                                    <%- elif column_info.col_type == 'enum' %>
+                                    <%- if column_info.col_name == 'DataStatus' %>|enum:'EnumCommitStatusType'<%- else %>|enum:'EnumOneAuditStatusType'
+                                    <%- endif %>
+                                    <%- endif %>}}</td>
                                 <%- endfor %>
-
                             </tr>
                         </tbody>
                     </table>
