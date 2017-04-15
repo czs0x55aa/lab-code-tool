@@ -48,6 +48,7 @@ class OracleManager(object):
             from user_tab_columns
             left join user_col_comments on user_tab_columns.column_name = user_col_comments.column_name
             WHERE user_tab_columns.table_name='%s' and user_col_comments.table_name=user_tab_columns.table_name
+            order by user_tab_columns.column_id
         """ % table_name
         query_res = self.execute_sql(query_sql)
         if len(query_res) == 0:
