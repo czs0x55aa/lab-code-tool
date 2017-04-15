@@ -15,7 +15,7 @@ class SimplePacker(BasePacker):
         # 定义要过滤掉的字段名
         ignore_col_list = ['ID', 'IsDeleted', 'DeleterUserCD', 'DeletionTime', 'LastModificationTime', 'CreationTime', 'CreatorUserCD']
         # 用于封装的键名
-        dict_key = ['col_name', 'col_type', 'col_comment', 'col_len', 'col_scale']
+        dict_key = ['col_name', 'col_type', 'col_comment', 'col_len', 'col_precision', 'col_scale']
         # 数据库中类型到前端页面类型的映射
         type_transform = {
             'TIMESTAMP': 'date',
@@ -31,7 +31,7 @@ class SimplePacker(BasePacker):
                 key, val = item
                 if key == 'col_type':
                     tf_key = re_data_type.findall(val)[0]
-                    if tf_key == 'NUMBER' and element[3][1] == 2:
+                    if tf_key == 'NUMBER' and element[4][1] == 2:
                         # 如果该字段是NUMBER(2)则设为枚举类型
                         return_list[key] = 'enum'
                     else:
