@@ -21,7 +21,8 @@ class SimplePacker(BasePacker):
             'TIMESTAMP': 'date',
             'DATE': 'date',
             'NUMBER': 'number',
-            'VARCHAR': 'string'
+            'VARCHAR': 'string',
+            'NVARCHAR': 'string'
         }
         re_data_type = re.compile('([A-Z]+)')
         # 对每行数据执行数据处理，处理后以字典形式返回
