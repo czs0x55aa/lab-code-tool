@@ -11,8 +11,8 @@
     resolve: helper.resolveFor('toaster', 'ngDialog')
 })
 .state('app.<< base_path >>.<< table_name >>.edit', {
-    url: '/edit?ID', 
-    templateUrl: helper.basepath('<< base_path >>/<< table_name >>Edit.html'),
-    controller: '<< table_name >>EditController', 
+    url: '/edit?ID',
+    templateUrl: helper.basepath('<< base_path >>/<< table_name >>edit.html'),
+    controller: '<< table_name >>EditController',
     resolve: helper.resolveFor('toaster', 'ngDialog', 'xeditable')
 })
