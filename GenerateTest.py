@@ -9,11 +9,11 @@ from DataPacker import SimplePacker
 # 输出目录
 output_dir = 'out/'
 # 子模块目录
-base_path = 'YbTest'
+base_path = 'Purchase'
 # 子模块名称
-base_path_name = u'前台测试'
+base_path_name = u'采购管理'
 # 该模块块下的数据表名
-table_list = ['BakePeriodStatus']
+table_list = ['GoodsStock', 'YbTestMain']
 
 if __name__ == '__main__':
     # 清理 新建 output directory
@@ -70,9 +70,9 @@ if __name__ == '__main__':
             if file_name.find(_suff) > 0:
                 # 缓存文件内容
                 with open(os.path.join(curPath, output_dir, file_name)) as input:
-                    output_buf.append(input.read())
+                    output_buf.append(input.read().strip())
                 # 删除已缓存的文件
                 os.remove(os.path.join(curPath, output_dir, file_name))
         # 重新生成合并后的文件
         with open(os.path.join(curPath, output_dir, _suff), 'w') as out:
-            out.write(''.join(output_buf))
+            out.write('\n'.join(output_buf))
