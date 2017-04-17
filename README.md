@@ -42,8 +42,7 @@ lab-code-tool/
 		{"table_name":"BaseTechPlanManage"},
 		{"table_name":"BaseEvaluation"}]
 }
-```
-
+```  
 ## 执行
 ```python
 python GenerateTest.py
