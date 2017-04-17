@@ -1,19 +1,25 @@
 # coding=utf8
 import os
 import re
+import json
 
 from DBconnect import OracleManager
 from CodeBuilder import HTMLBuilder
 from DataPacker import SimplePacker
 
+# 加载配置文件
+config_input = open('./generate_config.json', 'r')
+config_text = config_input.read()
+config_json = json.loads(config_text)
+
 # 输出目录
-output_dir = 'out/'
+output_dir = config_json['output_dir']
 # 子模块目录
-base_path = 'Purchase'
+base_path = config_json['base_path']
 # 子模块名称
-base_path_name = u'采购管理'
+base_path_name = config_json['base_path_name']
 # 该模块块下的数据表名
-table_list = ['GoodsStock']
+table_list = [x['table_name'] for x in config_json['table_list']]
 
 if __name__ == '__main__':
     # 清理 新建 output directory
