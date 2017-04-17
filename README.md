@@ -15,11 +15,12 @@ lab-code-tool/
 ├── DBconnect.py            数据库连接和基本查询
 ├── DataPacker.py           对数据进行自定义的封装
 ├── GenerateTest.py         代码生成测试
-├── generate_config.json	生成器的配置文件
+├── BaseAd_config.json		生成器的配置文件
 └── README.md
 ```
 
 ## 执行
 ```python
-python GenerateTest.py
+python GenerateTest.py BaseAd_config.json
 ```
+BaseAd_config.json包含了该模块的配置信息

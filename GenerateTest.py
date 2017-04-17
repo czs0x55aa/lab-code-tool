@@ -1,5 +1,6 @@
 # coding=utf8
 import os
+import sys
 import re
 import json
 
@@ -7,21 +8,30 @@ from DBconnect import OracleManager
 from CodeBuilder import HTMLBuilder
 from DataPacker import SimplePacker
 
-# 加载配置文件
-config_input = open('./generate_config.json', 'r')
-config_text = config_input.read()
-config_json = json.loads(config_text)
-
-# 输出目录
-output_dir = config_json['output_dir']
-# 子模块目录
-base_path = config_json['base_path']
-# 子模块名称
-base_path_name = config_json['base_path_name']
-# 该模块块下的数据表名
-table_list = [x['table_name'] for x in config_json['table_list']]
+def load_argv():
+    """ 加载配置文件 """
+    if len(sys.argv) == 2:
+        config_path = sys.argv[1]
+        # 读取配置文件
+        config_input = open(config_path, 'r')
+        config_text = config_input.read()
+        config_json = json.loads(config_text)
+        # 输出目录
+        output_dir = config_json['output_dir']
+        # 子模块目录
+        base_path = config_json['base_path']
+        # 子模块名称
+        base_path_name = config_json['base_path_name']
+        # 该模块下的数据表名
+        table_list = [x['table_name'] for x in config_json['table_list']]
+        return output_dir, base_path, base_path_name, table_list
+    else:
+        raise Exception(u'参数错误，运行方式：python GenerateTest.py config.json')
 
 if __name__ == '__main__':
+    # 读取用户指定的配置
+    output_dir, base_path, base_path_name, table_list = load_argv()
+
     # 清理 新建 output directory
     curPath = os.path.abspath(os.curdir)
     outPath = os.path.join(curPath, output_dir)
