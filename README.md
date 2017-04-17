@@ -21,7 +21,7 @@ lab-code-tool/
 
 ## generate_config配置
 例如基地管理：
-```json
+```
 {
 	"output_dir": "out/",
 	"base_path": "BaseAd",
@@ -42,7 +42,8 @@ lab-code-tool/
 		{"table_name":"BaseTechPlanManage"},
 		{"table_name":"BaseEvaluation"}]
 }
-```  
+```
+
 ## 执行
 ```python
 python GenerateTest.py
