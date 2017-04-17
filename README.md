@@ -19,31 +19,6 @@ lab-code-tool/
 └── README.md
 ```
 
-## generate_config配置
-例如基地管理：
-```
-{
-	"output_dir": "out/",
-	"base_path": "BaseAd",
-	"base_path_name": "基地管理",
-	"table_list": [
-		{"table_name":"BaseInfo"},
-		{"table_name":"ProductionStatus"},
-		{"table_name":"ClimaticConditions"},
-		{"table_name":"LevelYield"},
-		{"table_name":"SeedbedPeriodStatus"},
-		{"table_name":"TransplantPeriodInfo"},
-		{"table_name":"GrowPeriodStatus"},
-		{"table_name":"BakePeriodStatus"},
-		{"table_name":"NurseryPestControl"},
-		{"table_name":"TransplantPestControlTech"},
-		{"table_name":"GrowPestControlTech"},
-		{"table_name":"BakePestControlTech"},
-		{"table_name":"BaseTechPlanManage"},
-		{"table_name":"BaseEvaluation"}]
-}
-```
-
 ## 执行
 ```python
 python GenerateTest.py
