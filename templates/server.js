@@ -16,9 +16,9 @@
             method: 'Post',
             url: host + '/api/<< base_path >>/<< table_name >>/deletes'
         },
-        OneAudit: {
+        Audit: {
             method: 'Post',
-            url: host + '/api/<< base_path >>/<< table_name >>/OneAudit'
+            url: host + '/api/<< base_path >>/<< table_name >>/Audit'
         },
         <%- if 'Dic' in table_name %>
         DeleteDetail: {

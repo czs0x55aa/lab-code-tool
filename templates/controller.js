@@ -174,7 +174,7 @@
         $scope.check = function (status) {
             MyDialogs.Check().then(function (value) {
                 $scope.isLoading = true
-                << table_name >>.OneAudit({ 'ID': $scope.d.ID, 'AuditStatus': parseInt($scope.d.AuditStatus) + parseInt(status), 'AuditOpinions': value }, function (r) {
+                << table_name >>.Audit({ 'ID': $scope.d.ID, 'AuditStatus': parseInt($scope.d.AuditStatus) + parseInt(status), 'AuditOpinions': value }, function (r) {
                     if (r.Success) {
                         $scope.isLoading = false;
                         if ($stateParams.ID)
