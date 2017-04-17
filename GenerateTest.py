@@ -13,7 +13,7 @@ base_path = 'Purchase'
 # 子模块名称
 base_path_name = u'采购管理'
 # 该模块块下的数据表名
-table_list = ['GoodsStock', 'YbTestMain']
+table_list = ['GoodsStock']
 
 if __name__ == '__main__':
     # 清理 新建 output directory
