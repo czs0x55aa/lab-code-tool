@@ -177,6 +177,7 @@
                 << table_name >>.Audit({ 'ID': $scope.d.ID, 'AuditStatus': parseInt($scope.d.AuditStatus) + parseInt(status), 'AuditOpinions': value }, function (r) {
                     if (r.Success) {
                         $scope.isLoading = false;
+                        toaster.pop('success', '操作成功提示', "审核成功！");
                         if ($stateParams.ID)
                             load();
                         else
