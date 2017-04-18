@@ -104,8 +104,11 @@
                     else
                         $state.go('app.<< base_path >>.<< table_name >>.edit', { ID: r.Result.ID });
                 }
+            }, function (err) {
+                toaster.pop('error', '操作错误提示', "数据录入错误，请检查。");
+                $scope.isLoading = false;
             })
-        }
+      }
 
         $scope.addItem = function () {
             $scope.inserted = {
