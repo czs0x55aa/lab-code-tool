@@ -29,6 +29,7 @@ class SimplePacker(BasePacker):
         re_data_type = re.compile('([A-Z]+)')
         # 对每行数据执行数据处理，处理后以字典形式返回
         def data_process(element):
+
             return_list = {}
             for item in element:
                 key, val = item
