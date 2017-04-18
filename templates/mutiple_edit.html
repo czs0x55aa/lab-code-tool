@@ -43,10 +43,12 @@
                                     {{ d.AuditStatus|enum:'EnumOneAuditStatusType'}}
                                     <a ng-show="d.AuditStatus>0" class="btn btn-green btn-xs" ng-click="showAudit(d.FID)"><i class="fa fa-commenting-o"></i> </a>
                                     <%- endif %>
-                                    <%- elif column_info.col_name in ['ReceiptNum', 'ISO', 'OperatorName']%>
+                                    <%- elif column_info.col_name in ['ReceiptNum', 'ISO', 'OperatorName', 'Operator']%>
                                     <input ng-readonly="true" type="text" ng-model="d.<< column_info.col_name >>" popover-trigger="focus" popover="{{errorMessage.<< column_info.col_name >>}}" name="<< column_info.col_name >>" class="form-control  input-sm" required>
+                                    <%- elif column_info.col_type == 'number' %>
+                                    <input ng-readonly="d.DataStatus>=2" type="text" ng-model="d.<< column_info.col_name >>" popover-trigger="focus" popover="{{errorMessage.<< column_info.col_name >>}}" name="<< column_info.col_name >>" class="form-control input-sm" required maxlength="<< column_info.col_precision >>">
                                     <%- else %>
-                                    <input ng-readonly="d.DataStatus>=2" type="text" ng-model="d.<< column_info.col_name >>" popover-trigger="focus" popover="{{errorMessage.<< column_info.col_name >>}}" name="<< column_info.col_name >>" class="form-control  input-sm" required>
+                                    <input ng-readonly="d.DataStatus>=2" type="text" ng-model="d.<< column_info.col_name >>" popover-trigger="focus" popover="{{errorMessage.<< column_info.col_name >>}}" name="<< column_info.col_name >>" class="form-control input-sm" required maxlength="<< column_info.col_len >>">
                                     <%- endif %>
                                 </div>
                             </div>
