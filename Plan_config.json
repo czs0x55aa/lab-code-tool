@@ -1,0 +1,13 @@
+{
+	"output_dir": "Plan/",
+	"base_path": "Plan",
+	"base_path_name": "计划管理",
+	"table_list": [
+		{"table_name":"AnnualProtocol"},
+		{"table_name":"RealTimeContract"},
+		{"table_name":"ProcessContract"},
+		{"table_name":"AllocateTransport"},
+		{"table_name":"PaperContractProtocol"},
+		{"table_name":"ContractProtocolType"},
+		{"table_name":"ContractSettlement"}]
+}
