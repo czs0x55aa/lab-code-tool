@@ -68,7 +68,7 @@ if __name__ == '__main__':
         # 指定要使用的模板和对应的生成文件名
         template_pages = {'list.html': get_file_name(table_name, 'html'),
                         'edit.html' if detail_dict_list is None else 'mutiple_edit.html': get_file_name(table_name+'edit', 'html'),
-                        'controller.js': get_file_name(table_name+'_controller', 'js'),
+                        'controller.js': get_file_name(table_name+'Controller', 'js'),
                         'dicserver.js': get_file_name(table_name+'_dicserver', 'js'),
                         'route.js': get_file_name(table_name+'_route', 'js'),
                         'server.js': get_file_name(table_name+'_server', 'js')}
@@ -77,7 +77,7 @@ if __name__ == '__main__':
             code_builder.create_html(template, render_module, output_dir + file_name)
 
     # 指定要合并的文件名后缀名
-    merge_list = ['_controller.js', '_dicserver.js', '_route.js', '_server.js']
+    merge_list = ['_dicserver.js', '_route.js', '_server.js']
     # 合并
     for _suff in merge_list:
         output_buf = []

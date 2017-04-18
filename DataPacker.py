@@ -5,7 +5,6 @@ class BasePacker(object):
     def __init__(self, db):
         self.db = db
 
-
 class SimplePacker(BasePacker):
     def pack_single_table(self, table_name):
         structure_list = self.db.get_table_structure(table_name)
@@ -13,7 +12,10 @@ class SimplePacker(BasePacker):
         if structure_list is None:
             return None
         # 定义要过滤掉的字段名
-        ignore_col_list = ['ID', 'IsDeleted', 'DeleterUserCD', 'DeletionTime', 'LastModificationTime', 'CreationTime', 'CreatorUserCD']
+        ignore_col_list = ['ID', 'IsDeleted', 'DeletionTime', 'LastModificationTime',
+            'CreationTime', 'AuditTime', 'AuditName', 'AuditOpinion']
+        # 过滤CD结尾的字段名
+        re_CD_end = re.compile('CD$')
         # 用于封装的键名
         dict_key = ['col_name', 'col_type', 'col_comment', 'col_len', 'col_precision', 'col_scale']
         # 数据库中类型到前端页面类型的映射
@@ -47,7 +49,7 @@ class SimplePacker(BasePacker):
         pack_list = []
         for item in structure_list:
             # 过滤掉不用返回的列
-            if item[0] in ignore_col_list:
+            if item[0] in ignore_col_list or re_CD_end.search(item[0]) is not None:
                 continue
             item_dict = dict(data_process(zip(dict_key, item)))
             pack_list.append(item_dict)
