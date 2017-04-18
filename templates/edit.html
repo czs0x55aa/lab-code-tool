@@ -43,7 +43,7 @@
                                     {{ d.AuditStatus|enum:'EnumOneAuditStatusType'}}
                                     <a ng-show="d.AuditStatus>0" class="btn btn-green btn-xs" ng-click="showAudit(d.FID)"><i class="fa fa-commenting-o"></i> </a>
                                     <%- endif %>
-                                    <%- elif column_info.col_name == 'ReceiptNum' || column_info.col_name == 'ISO' %>
+                                    <%- elif column_info.col_name == 'ReceiptNum' or column_info.col_name == 'ISO' %>
                                     <input ng-readonly="true" type="text" ng-model="d.<< column_info.col_name >>" popover-trigger="focus" popover="{{errorMessage.<< column_info.col_name >>}}" name="<< column_info.col_name >>" class="form-control  input-sm" required>
                                     <%- else %>
                                     <input ng-readonly="d.DataStatus>=2" type="text" ng-model="d.<< column_info.col_name >>" popover-trigger="focus" popover="{{errorMessage.<< column_info.col_name >>}}" name="<< column_info.col_name >>" class="form-control  input-sm" required>
