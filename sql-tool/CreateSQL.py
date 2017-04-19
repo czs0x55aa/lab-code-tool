@@ -13,20 +13,28 @@ def update_comment():
     """ 修改字段备注 """
     # 定义要修改的字段名和备注名
     field_comment_dict = {
-        'DataStatus': u'数据状态',
-        'AuditStatus': u'审计状态',
-        'MakeDate': u'制单日期',
-        'IsDeleted': u'是否删除',
-        'DeleterUserCD': u'删除代码',
-        'DeletionTime': u'删除时间',
-        'LastModificationTime': u'修改时间',
-        'LastModiferUserCD': u'修改人',
-        'CreationTime': u'创建时间',
-        'CreatorUserCD': u'创建者',
-        'AuditTime': u'审核日期',
-        'AuditCD': u'审核人代码',
-        'AuditName': u'审核人',
-        'AuditOpinion': u'审核意见'
+        # 'DataStatus': u'数据状态',
+        # 'AuditStatus': u'审计状态',
+        # 'MakeDate': u'制单日期',
+        # 'IsDeleted': u'是否删除',
+        # 'DeleterUserCD': u'删除代码',
+        # 'DeletionTime': u'删除时间',
+        # 'LastModificationTime': u'修改时间',
+        # 'LastModiferUserCD': u'修改人',
+        # 'CreationTime': u'创建时间',
+        # 'CreatorUserCD': u'创建者',
+        # 'AuditTime': u'审核日期',
+        # 'AuditCD': u'审核人代码',
+        # 'AuditName': u'审核人',
+        # 'AuditOpinion': u'审核意见'
+        'ID': u'主键',
+        'Sort': u'排序',
+        'Code': u'代码',
+        'Name': u'中文名称',
+        'HelpWord': u'助记词',
+        'Remark': u'备注',
+        'LastModifierUserCD ': u'修改人',
+        'Ratio': u'系数'
     }
     for table_name in table_name_list:
         for field, comment in field_comment_dict.items():
@@ -57,7 +65,7 @@ def delete_field_name():
     #         if sql_tool.table_has_field(table_name, field):
     #             sql_tool.del_field(table_name, field)
 
-    # 删除从表中的下列字段
+    # 删除从表中的下列
     detail_del_list = ['AuditTime', 'AuditCD', 'AuditName', 'AuditOpinion']
     for table_name in table_name_list:
         # 忽略从表以外的表
@@ -107,4 +115,4 @@ def modify_field():
 
 if __name__ == '__main__':
 
-    delete_field_name()
+    update_comment()
