@@ -1,0 +1,210 @@
+﻿
+<div ng-class="{'whirl':isLoading,'traditional':isLoading}">
+    <form class="form-horizontal w5c-form" w5c-form-validate="validateOptions" role="form" novalidate name="addForm">
+        <h3>
+            <span class="pull-right">
+                <a ng-show="d.DataStatus<2" class="btn btn-info btn-sm" ng-click="addItem();"><i class="fa fa-plus"></i>添加</a>
+                <a ng-show="d.DataStatus<2" class="btn btn-info btn-sm" w5c-form-submit="save()"> <i class="fa fa-save"></i> 保存</a>
+                <a ng-show="d.DataStatus<2" class="btn btn-info btn-sm" ng-click="confirm()"><i class="fa fa-check"></i> 提交</a>
+                <a ng-show="d.DataStatus==2" class="btn btn-info btn-sm" ng-click="check(2)"><i class="fa fa-pencil"></i> 审核</a>
+                <a ng-show="d.DataStatus==2" class="btn btn-info btn-sm" ng-click="check(1)"><i class="fa fa-reply"></i> 审核不通过</a>
+                <a class="btn btn-info btn-sm" ng-click="report()"><i class="fa fa-file-text-o"></i> 报表</a>
+                <a class="btn btn-info btn-sm" ng-click="excel()"><i class="fa fa-file-excel-o"></i> 导出</a>
+            </span>
+                 工商交接价格维护数据表
+             <ol class="breadcrumb">
+                <li>
+                    采购管理
+                </li>
+                <li>
+                    <a ui-sref="app.Purchase.IndustryCommPrice.list">
+                        工商交接价格维护数据表
+                    </a>
+                </li>
+                <li class="active">编辑</li>
+            </ol>
+        </h3>
+
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right">ISO编号</label>
+                                <div class="col-lg-8">
+                                    <input ng-readonly="true" type="text" ng-model="d.ISO" popover-trigger="focus" popover="{{errorMessage.ISO}}" name="ISO" class="form-control  input-sm" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right">单据编号</label>
+                                <div class="col-lg-8">
+                                    <input ng-readonly="true" type="text" ng-model="d.ReceiptNum" popover-trigger="focus" popover="{{errorMessage.ReceiptNum}}" name="ReceiptNum" class="form-control  input-sm" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right">制单日期</label>
+                                <div class="col-lg-8">
+                                    <input  ng-readonly="d.DataStatus>=2" type="text" converttodate="yyyy-MM-dd" ng-model="d.MakeDate" popover-trigger="focus"  ng-disabled="{{disable}}" popover="{{errorMessage.MakeDate}}" name="MakeDate" class="form-control  input-sm" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd', maxDate: new Date() })" onchange="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right">制单人</label>
+                                <div class="col-lg-8">
+                                    <input ng-readonly="d.DataStatus>=2" type="text" ng-model="d.MakingPeople" popover-trigger="focus" popover="{{errorMessage.MakingPeople}}" name="MakingPeople" class="form-control input-sm" required maxlength="30">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right">年份</label>
+                                <div class="col-lg-8">
+                                    <input ng-readonly="d.DataStatus>=2" type="text" ng-model="d.Year" popover-trigger="focus" popover="{{errorMessage.Year}}" name="Year" class="form-control input-sm" required maxlength="4">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right">规格</label>
+                                <div class="col-lg-8">
+                                    <input ng-readonly="d.DataStatus>=2" type="text" ng-model="d.TobaccoSpec" popover-trigger="focus" popover="{{errorMessage.TobaccoSpec}}" name="TobaccoSpec" class="form-control input-sm" required maxlength="100">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right">产地</label>
+                                <div class="col-lg-8">
+                                    <input ng-readonly="d.DataStatus>=2" type="text" ng-model="d.TobaccoPlace" popover-trigger="focus" popover="{{errorMessage.TobaccoPlace}}" name="TobaccoPlace" class="form-control input-sm" required maxlength="100">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right">类型</label>
+                                <div class="col-lg-8">
+                                    <input ng-readonly="d.DataStatus>=2" type="text" ng-model="d.TobaccoType" popover-trigger="focus" popover="{{errorMessage.TobaccoType}}" name="TobaccoType" class="form-control input-sm" required maxlength="100">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right">等级</label>
+                                <div class="col-lg-8">
+                                    <input ng-readonly="d.DataStatus>=2" type="text" ng-model="d.TobaccoGrade" popover-trigger="focus" popover="{{errorMessage.TobaccoGrade}}" name="TobaccoGrade" class="form-control input-sm" required maxlength="100">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right">品种</label>
+                                <div class="col-lg-8">
+                                    <input ng-readonly="d.DataStatus>=2" type="text" ng-model="d.TobaccoBreed" popover-trigger="focus" popover="{{errorMessage.TobaccoBreed}}" name="TobaccoBreed" class="form-control input-sm" required maxlength="20">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right">形态</label>
+                                <div class="col-lg-8">
+                                    <input ng-readonly="d.DataStatus>=2" type="text" ng-model="d.TobaccoShape" popover-trigger="focus" popover="{{errorMessage.TobaccoShape}}" name="TobaccoShape" class="form-control input-sm" required maxlength="100">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right">联营产品</label>
+                                <div class="col-lg-8">
+                                    <input ng-readonly="d.DataStatus>=2" type="text" ng-model="d.TobaccoAssociatedProd" popover-trigger="focus" popover="{{errorMessage.TobaccoAssociatedProd}}" name="TobaccoAssociatedProd" class="form-control input-sm" required maxlength="100">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right">基本单价(担)</label>
+                                <div class="col-lg-8">
+                                    <input ng-readonly="d.DataStatus>=2" type="text" ng-model="d.UnitPrice" popover-trigger="focus" popover="{{errorMessage.UnitPrice}}" name="UnitPrice" class="form-control input-sm" required maxlength="18">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right">烟叶代码</label>
+                                <div class="col-lg-8">
+                                    <input ng-readonly="d.DataStatus>=2" type="text" ng-model="d.TobaccoCode" popover-trigger="focus" popover="{{errorMessage.TobaccoCode}}" name="TobaccoCode" class="form-control input-sm" required maxlength="50">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right">调拨单价(担)</label>
+                                <div class="col-lg-8">
+                                    <input ng-readonly="d.DataStatus>=2" type="text" ng-model="d.AllotPrice" popover-trigger="focus" popover="{{errorMessage.AllotPrice}}" name="AllotPrice" class="form-control input-sm" required maxlength="18">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right">执行开始时间</label>
+                                <div class="col-lg-8">
+                                    <input  ng-readonly="d.DataStatus>=2" type="text" converttodate="yyyy-MM-dd" ng-model="d.PerformStartTime" popover-trigger="focus"  ng-disabled="{{disable}}" popover="{{errorMessage.PerformStartTime}}" name="PerformStartTime" class="form-control  input-sm" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd', maxDate: new Date() })" onchange="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right">执行截止时间</label>
+                                <div class="col-lg-8">
+                                    <input  ng-readonly="d.DataStatus>=2" type="text" converttodate="yyyy-MM-dd" ng-model="d.PerformDeadline" popover-trigger="focus"  ng-disabled="{{disable}}" popover="{{errorMessage.PerformDeadline}}" name="PerformDeadline" class="form-control  input-sm" onfocus="WdatePicker({ dateFmt: 'yyyy-MM-dd', maxDate: new Date() })" onchange="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right">备注</label>
+                                <div class="col-lg-8">
+                                    <input ng-readonly="d.DataStatus>=2" type="text" ng-model="d.Remark" popover-trigger="focus" popover="{{errorMessage.Remark}}" name="Remark" class="form-control input-sm" required maxlength="200">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right">数据状态</label>
+                                <div class="col-lg-8">
+                                    {{ d.DataStatus|enum:'EnumOneAuditStatusType'}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label class="col-lg-4 control-label text-right">审计状态</label>
+                                <div class="col-lg-8">
+                                    {{ d.AuditStatus|enum:'EnumOneAuditStatusType'}}
+                                    <a ng-show="d.AuditStatus>0" class="btn btn-green btn-xs" ng-click="showAudit(d.FID)"><i class="fa fa-commenting-o"></i> </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

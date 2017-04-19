@@ -1,0 +1,22 @@
+{
+	"output_dir": "Purchase/",
+	"base_path": "Purchase",
+	"base_path_name": "采购管理",
+	"table_list": [
+		{"table_name":"GoodsStock"},
+		{"table_name":"CaboPurchaseApprove"},
+		{"table_name":"CooperPurchaseApprove"},
+		{"table_name":"SlicePurchaseApprove"},
+		{"table_name":"StripsPurchaseApprove"},
+		{"table_name":"TobaccoPurchaseApprove"},
+		{"table_name":"EstimateInInventory"},
+		{"table_name":"OtherInInventory"},
+		{"table_name":"IndustryCommMaterial"},
+		{"table_name":"IndustryCommProtocol"},
+		{"table_name":"IndustryCommPrice"},
+		{"table_name":"LocalArrivalRecords"},
+		{"table_name":"RemoteArrivalRecords"},
+		{"table_name":"RemotePurchaseNavicert"},
+		{"table_name":"MaterialTransport"}
+	]
+}

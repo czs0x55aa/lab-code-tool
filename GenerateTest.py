@@ -57,9 +57,9 @@ if __name__ == '__main__':
             'base_path_name': base_path_name,
             'table_name': table_name,
             'table_name_zh': db.get_table_comment(table_name),
-            'field_list': table_dict_list,
-            'detail_field_list': detail_dict_list,
-            'list_len': len(table_dict_list),
+            'field_list': [] if table_dict_list is None else table_dict_list,
+            'detail_field_list': [] if detail_dict_list is None else detail_dict_list,
+            'list_len': 0 if table_dict_list is None else len(table_dict_list),
             'detail_list_len': 0 if detail_dict_list is None else len(detail_dict_list)
         }
 

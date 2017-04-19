@@ -1,0 +1,125 @@
+<div ng-class="{'whirl':isLoading,'traditional':isLoading}">
+    <h3>
+        <span class="pull-right">
+            <a class="btn btn-info btn-sm" ui-sref="app.Purchase.MaterialTransport.edit"><i class="fa fa-plus"></i> 新增</a>
+            <a class="btn btn-info btn-sm" ng-click="edit()"><i class="fa fa-edit"></i> 编辑</a>
+            <a class="btn btn-info btn-sm" ng-click="del()"><i class="fa fa-times"></i> 删除</a>
+        </span>
+        原料运输单表（主表）
+        <ol class="breadcrumb">
+            <li>
+                采购管理
+            </li>
+            <li class="active">原料运输单表（主表）</li>
+        </ol>
+    </h3>
+
+    <div class="row">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <form name="form" class="form-inline">
+                    <div class="form-group">
+                        <label>单据编号</label>
+                        <input type="text" name="ReceiptNum" class="form-control input-sm txtsearch" ng-model="p.ReceiptNum" />
+                    </div>
+                    <div class="form-group">
+                        <label>审核</label>
+                        <select name="DataStatus" ng-model="p.AuditStatus" class="form-control input-sm ">
+                            <option selected="selected" value="">请选择</option>
+                            <option ng-repeat="(k,v) in enums['EnumOneAuditStatusType']" value="{{k}}">{{v}}</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>制单日期</label>
+                        <input type="text" ng-model="p.start" name="beginDate" ng-disabled="disable" placeholder="开始日期" id="time" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'})" class="form-control txtdate" onchange="">
+                        <input type="text" ng-model="p.end" name="endDate" placeholder="结束日期"  ng-disabled="disable" id="time1" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd'})" class="form-control txtdate" onchange="">
+                    </div>
+                    <button class="btn btn-primary btn-sm" type="button" ng-click="load()">
+                        <i class="fa" ng-class="{'fa-spinner fa-spin':loading,'fa-search':!loading}"></i> {{loading?'搜索中':'搜索'}}
+                    </button>
+                </form>
+
+                <div class="table-responsive">
+                    <table class="table table-sm table-striped table-bordered table-hover table-condensed" >
+                        <thead>
+                            <tr>
+                                <th>选择</th>
+                                <th>行号</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'ISO'" change="load()">ISO编码</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'ReceiptNum'" change="load()">单据编号</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'MakeDate'" change="load()">制单日期</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'CarrierTime'" change="load()">承运日期</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'CarrierUnitName'" change="load()">承运单位</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'TuneOutUnitName'" change="load()">调出单位</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'TuneInUnitName'" change="load()">调入单位</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'ReceiveTime'" change="load()">收货日期</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'DriverName'" change="load()">司机签名</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'StorageName'" change="load()">储运员</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'TransportNum'" change="load()">手动运输单</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'TuneInName'" change="load()">调入经手</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'TuneOutName'" change="load()">调出经手</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'DeliveryStation'" change="load()">发货站</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'SettleArrivalStation'" change="load()">到货站</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'SettleDeliveryStation'" change="load()">结算发货站</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'ArrivalStation'" change="load()">结算到货站</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'CN'" change="load()">合同编号</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'ReceiveNum'" change="load()">到货登记 单号</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'PurchaseBatch'" change="load()">批次</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'CarNum'" change="load()">车号</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'PackageDescription'" change="load()">包装物损失说明</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'Remark'" change="load()">备注</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'DataStatus'" change="load()">数据状态</th>
+                                <th table-sort by="p.sort" reverse="p.isAsc" order="'AuditStatus'" change="load()">审计状态</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-show="list.Data.length< 1">
+                                <td class="text-center" colspan="25">没有数据</td>
+                            </tr>
+                            <tr ng-dblclick="edit(item.ID)" ng-click="item.select==true?item.select=false:item.select=true" ng-hide="list.Data.length< 1" ng-repeat="item in list.Data">
+                                <td clickselect="selected" select="row">
+                                    <div class="checkbox c-checkbox" style="margin:0">
+                                        <label>
+                                            <input type="checkbox" required="" name="checkbox" ng-model="item.select" style="">
+                                            <span class="fa fa-check"></span>
+                                        </label>
+                                    </div>
+                                </td>
+                                <td>{{$index+1}}</td>
+                                <td>{{ item.ISO}}</td>
+                                <td>{{ item.ReceiptNum}}</td>
+                                <td>{{ item.MakeDate|date:'yyyy-MM-dd'}}</td>
+                                <td>{{ item.CarrierTime|date:'yyyy-MM-dd'}}</td>
+                                <td>{{ item.CarrierUnitName}}</td>
+                                <td>{{ item.TuneOutUnitName}}</td>
+                                <td>{{ item.TuneInUnitName}}</td>
+                                <td>{{ item.ReceiveTime|date:'yyyy-MM-dd'}}</td>
+                                <td>{{ item.DriverName}}</td>
+                                <td>{{ item.StorageName}}</td>
+                                <td>{{ item.TransportNum}}</td>
+                                <td>{{ item.TuneInName}}</td>
+                                <td>{{ item.TuneOutName}}</td>
+                                <td>{{ item.DeliveryStation}}</td>
+                                <td>{{ item.SettleArrivalStation}}</td>
+                                <td>{{ item.SettleDeliveryStation}}</td>
+                                <td>{{ item.ArrivalStation}}</td>
+                                <td>{{ item.CN}}</td>
+                                <td>{{ item.ReceiveNum}}</td>
+                                <td>{{ item.PurchaseBatch}}</td>
+                                <td>{{ item.CarNum}}</td>
+                                <td>{{ item.PackageDescription}}</td>
+                                <td>{{ item.Remark}}</td>
+                                <td ng-class="{'text-danger':item.DataStatus==1}">{{ item.DataStatus|enum:'EnumCommitStatusType'}}</td>
+                                <td ng-class="{'text-danger':item.AuditStatus==1}">{{ item.AuditStatus|enum:'EnumOneAuditStatusType'}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="text-center">
+                    <uib-pagination boundary-links="true" total-items="list.TotalCount" items-per-page='list.PageSize' ng-model="list.PageIndex" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" max-size="5" ng-change="load()" class="pagination-sm"></uib-pagination>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
