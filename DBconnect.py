@@ -83,6 +83,7 @@ class SQLTool(OracleManager):
         """
         comment_sql = "comment on column \"%s\".\"%s\" is '%s'" % (table_name, field_name, comment)
         self.cursor.execute(comment_sql)
+        print 'add comment %s(%s) from %s' % (field_name, comment, table_name)
 
     def update_field_name(self, table_name, old_field, new_field):
         """
@@ -90,18 +91,20 @@ class SQLTool(OracleManager):
         """
         alter_sql = "alter table \"%s\" rename column \"%s\" to \"%s\"" % (table_name, old_field, new_field)
         self.cursor.execute(alter_sql)
+        print 'update %s to %s to %s' % (old_field, new_field, table_name)
 
-    def update_field_type(self, table_name, field_name, type_str, default_str=None):
+    def update_field_type(self, table_name, field_name, type_str, default_str=None, op='modify'):
         """
         修改数据表中的一个字段类型
         """
-        alter_sql = "alter table \"%s\" modify \"%s\" %s " % (table_name, field_name, type_str)
+        alter_sql = "alter table \"%s\" %s \"%s\" %s " % (table_name, op, field_name, type_str)
         if default_str is not None:
             alter_sql += default_str
         # 为了避免表中有数据无法改字段类型，先清空表中数据
         self.table_clear(table_name)
         # 修改字段类型
         self.cursor.execute(alter_sql)
+        print '%s %s(%s) from %s' (op, field_name, type_str, table_name)
 
     def del_field(self, table_name, field_name):
         """
@@ -109,6 +112,7 @@ class SQLTool(OracleManager):
         """
         alter_sql = "alter table \"%s\" drop column \"%s\"" % (table_name, field_name)
         self.cursor.execute(alter_sql)
+        print 'drop column %s from %s' % (field_name, table_name)
 
     def table_clear(self, table_name):
         """

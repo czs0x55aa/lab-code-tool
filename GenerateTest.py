@@ -3,6 +3,7 @@ import os
 import sys
 import re
 import json
+import shutil
 
 from DBconnect import OracleManager
 from CodeBuilder import HTMLBuilder
@@ -36,10 +37,11 @@ if __name__ == '__main__':
     curPath = os.path.abspath(os.curdir)
     outPath = os.path.join(curPath, output_dir)
     if os.path.exists(outPath):
-        for i in os.listdir(outPath):
-            os.remove(os.path.join(curPath, output_dir, i))
-    else:
-        os.mkdir(outPath)
+        # 如果输出目录已经存在 递归删除整个目录
+        shutil.rmtree(outPath)
+    os.mkdir(outPath)
+    # 添加额外的Controller目录 用于存放js控制器
+    os.mkdir(outPath + 'Controller/')
 
     db = OracleManager()
     # 创建打包器，封装表结构
@@ -68,7 +70,7 @@ if __name__ == '__main__':
         # 指定要使用的模板和对应的生成文件名
         template_pages = {'list.html': get_file_name(table_name, 'html'),
                         'edit.html' if detail_dict_list is None else 'mutiple_edit.html': get_file_name(table_name+'edit', 'html'),
-                        'controller.js': get_file_name(table_name+'Controller', 'js'),
+                        'controller.js': get_file_name('Controller/'+table_name+'Controller', 'js'),
                         'dicserver.js': get_file_name(table_name+'_dicserver', 'js'),
                         'route.js': get_file_name(table_name+'_route', 'js'),
                         'server.js': get_file_name(table_name+'_server', 'js')}
