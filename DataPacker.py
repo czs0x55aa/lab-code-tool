@@ -13,7 +13,7 @@ class SimplePacker(BasePacker):
             return None
         # 定义要过滤掉的字段名
         ignore_col_list = ['ID', 'IsDeleted', 'DeletionTime', 'LastModificationTime',
-            'CreationTime', 'AuditTime', 'AuditName', 'AuditOpinion']
+            'CreationTime', 'DataStatus', 'AuditTime', 'AuditName', 'AuditOpinion']
         # 过滤CD结尾的字段名
         re_CD_end = re.compile('CD$')
         # 用于封装的键名

@@ -14,7 +14,7 @@ def update_comment():
     # 定义要修改的字段名和备注名
     field_comment_dict = {
         # 'DataStatus': u'数据状态',
-        # 'AuditStatus': u'审计状态',
+        'AuditStatus': u'审核状态'
         # 'MakeDate': u'制单日期',
         # 'IsDeleted': u'是否删除',
         # 'DeleterUserCD': u'删除代码',
@@ -27,14 +27,14 @@ def update_comment():
         # 'AuditCD': u'审核人代码',
         # 'AuditName': u'审核人',
         # 'AuditOpinion': u'审核意见'
-        'ID': u'主键',
-        'Sort': u'排序',
-        'Code': u'代码',
-        'Name': u'中文名称',
-        'HelpWord': u'助记词',
-        'Remark': u'备注',
-        'LastModifierUserCD ': u'修改人',
-        'Ratio': u'系数'
+        # 'ID': u'主键',
+        # 'Sort': u'排序',
+        # 'Code': u'代码',
+        # 'Name': u'中文名称',
+        # 'HelpWord': u'助记词',
+        # 'Remark': u'备注',
+        # 'LastModifierUserCD ': u'修改人',
+        # 'Ratio': u'系数'
     }
     for table_name in table_name_list:
         for field, comment in field_comment_dict.items():
@@ -116,4 +116,4 @@ def modify_field():
 
 if __name__ == '__main__':
 
-    modify_field()
+    update_comment()

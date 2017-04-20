@@ -70,7 +70,7 @@ if __name__ == '__main__':
         # 指定要使用的模板和对应的生成文件名
         template_pages = {'list.html': get_file_name(table_name, 'html'),
                         'edit.html' if detail_dict_list is None else 'mutiple_edit.html': get_file_name(table_name+'edit', 'html'),
-                        'controller.js': get_file_name('Controller/'+table_name+'Controller', 'js'),
+                        'controller.js': get_file_name('Controller/'+table_name, 'js'),
                         'dicserver.js': get_file_name(table_name+'_dicserver', 'js'),
                         'route.js': get_file_name(table_name+'_route', 'js'),
                         'server.js': get_file_name(table_name+'_server', 'js')}
