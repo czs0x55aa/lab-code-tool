@@ -104,7 +104,7 @@ class SQLTool(OracleManager):
         self.table_clear(table_name)
         # 修改字段类型
         self.cursor.execute(alter_sql)
-        print '%s %s(%s) from %s' (op, field_name, type_str, table_name)
+        print '%s %s(%s) from %s' % (op, field_name, type_str, table_name)
 
     def del_field(self, table_name, field_name):
         """

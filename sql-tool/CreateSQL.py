@@ -102,7 +102,8 @@ def add_field():
 
 def modify_field():
     modify_dict = {
-        'IsDeleted': ('NUMBER(2)', 'default 0')
+        # 'IsDeleted': ('NUMBER(2)', 'default 0')
+        'ReceiptNum': ('VARCHAR2(40)', '')
     }
     for table_name in table_name_list:
         for field, ele in modify_dict.items():
@@ -115,4 +116,4 @@ def modify_field():
 
 if __name__ == '__main__':
 
-    update_comment()
+    modify_field()
