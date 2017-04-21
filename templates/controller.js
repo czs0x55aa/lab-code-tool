@@ -155,6 +155,7 @@
         };
 
         <%- for dic_name in dic_name_list %>
+        // << loop.index >>. << dic_name >>
         $scope.Dic<< dic_name >>s = []; //字典
         $scope.loadDic<< dic_name >>s = function () {
             if (!$scope.Dic<< dic_name >>s.length)
@@ -162,7 +163,6 @@
                     $scope.Dic<< dic_name >>s = r.Result.Data;
                 })
         };
-
         $scope.showDic<< dic_name >> = function (item) {
             if (item.<< dic_name >>CD && $scope.Dic<< dic_name >>s.length) {
                 var selected = $filter('filter')($scope.Dic<< dic_name >>s, { SYS_USER_CD: item.<< dic_name >>CD });
@@ -171,6 +171,7 @@
             return item.<< dic_name >>Name;
 
         };
+
         <%- endfor %>
 
         $scope.DicWarehouses = []; //字典
