@@ -8,6 +8,7 @@ class BasePacker(object):
 class SimplePacker(BasePacker):
     def get_dic_name_list(self):
         table_name_list = self.db.get_dic_tablename()
+        # 去掉Dic表名开头的'Dic'
         return [x[3:] for x in table_name_list]
 
     def pack_single_table(self, table_name):
