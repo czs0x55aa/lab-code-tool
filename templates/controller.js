@@ -61,8 +61,20 @@
         }
     }
 
-    << table_name >>EditController.$inject = ['$rootScope', '$scope', '$stateParams', '$state', 'ngDialog','MyDialogs', 'toaster', '$filter', 'editableOptions', 'editableThemes', '$q', 'SysReceiptConfig', '<< table_name >>','DicWarehouse'];
-    function << table_name >>EditController($rootScope, $scope, $stateParams, $state, ngDialog,MyDialogs, toaster, $filter, editableOptions, editableThemes, $q, SysReceiptConfig, << table_name >>, DicWarehouse) {
+    << table_name >>EditController.$inject = ['$rootScope', '$scope', '$stateParams', '$state', 'ngDialog','MyDialogs', 'toaster', '$filter', 'editableOptions', 'editableThemes', '$q', 'SysReceiptConfig', '<< table_name >>','DicWarehouse',
+        <%- for dic_name in dic_name_list %>
+        '<< dic_name >>',
+        <%- endfor %>
+    ];
+    function << table_name >>EditController($rootScope, $scope, $stateParams, $state, ngDialog,MyDialogs, toaster, $filter, editableOptions, editableThemes, $q, SysReceiptConfig, << table_name >>, DicWarehouse,
+        <%- for dic_name in dic_name_list %>
+        <%- if loop.index + 1 != loop.length %>
+        << dic_name >>,
+        <%- else %>
+        << dic_name >>
+        <%- endif %>
+        <%- endfor %>
+    ) {
         $scope.subIDs = { "IDs": [], "FID": $stateParams.ID };
         $scope.d = { << table_name >>Detail: [] };
         var load = $scope.load = function () {
@@ -113,6 +125,7 @@
                 toaster.pop('error', '操作错误提示', "数据录入错误，请检查。");
                 $scope.isLoading = false;
             })
+
       }
 
         $scope.addItem = function () {
@@ -140,6 +153,25 @@
             if (ID)
                 $scope.subIDs.IDs.push(ID);
         };
+
+        <%- for dic_name in dic_name_list %>
+        $scope.Dic<< dic_name >>s = []; //字典
+        $scope.loadDic<< dic_name >>s = function () {
+            if (!$scope.Dic<< dic_name >>s.length)
+                Dic<< dic_name >>.Get({}, function (r) {
+                    $scope.Dic<< dic_name >>s = r.Result.Data;
+                })
+        };
+
+        $scope.showDic<< dic_name >> = function (item) {
+            if (item.<< dic_name >>CD && $scope.Dic<< dic_name >>s.length) {
+                var selected = $filter('filter')($scope.Dic<< dic_name >>s, { SYS_USER_CD: item.<< dic_name >>CD });
+                item.<< dic_name >>Name = selected.length ? selected[0].SYS_CD_NM : "";
+            }
+            return item.<< dic_name >>Name;
+
+        };
+        <%- endfor %>
 
         $scope.DicWarehouses = []; //字典
         $scope.loadDicWarehouses = function () {

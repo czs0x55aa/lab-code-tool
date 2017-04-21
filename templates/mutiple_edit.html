@@ -126,6 +126,9 @@
                                 </td>
                                 <td>{{$index+1}}</td>
                                 <%- for column_info in detail_field_list %>
+                                <%- if 'CD' in column_info.col_name %>
+                                <td><span editable-select="item.<< column_info.col_name >>" e-name="<< column_info.col_name >>" onshow="loadDic<< column_info.col_name|replce('CD', '') >>s()" e-form="rowform" e-ng-options="g.SYS_USER_CD as g.SYS_CD_NM for g in Dic<< column_info.col_name|replce('CD', '') >>s">{{ showDic<< column_info.col_name|replce('CD', '') >>(item) }}</span>  </td>
+                                <%- else %>
                                 <td><span editable-text="item.<< column_info.col_name >>" e-name="<< column_info.col_name >>" e-form="rowform" e-required="">{{ item.<< column_info.col_name >> }}</span></td>
                                 <%- endfor %>
                             </tr>
