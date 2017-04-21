@@ -59,6 +59,18 @@
                         <%- endif %>
                         <%- endfor %>
                     </div>
+                    <%- if remark_flag %>
+                    <div class="col-sm-12">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label class="col-remark-title  control-label text-right">备注</label>
+                                <div class="col-remark-content">
+                                    <textarea ng-readonly="d.DataStatus>=2" ng-model="d.Remark" popover-trigger="focus" popover="{{errorMessage.Remark}}" name="Remark" class="form-control  input-sm" maxlength="200"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <%- endif %>
                 </div>
             </div>
         </div>

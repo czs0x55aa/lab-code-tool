@@ -10,7 +10,7 @@ class SimplePacker(BasePacker):
         structure_list = self.db.get_table_structure(table_name)
         # 检查查询结果是否为空
         if structure_list is None:
-            return None
+            return None, None
         # 定义要过滤掉的字段名
         ignore_col_list = ['ID', 'IsDeleted', 'DeletionTime', 'LastModificationTime',
             'CreationTime', 'DataStatus', 'AuditTime', 'AuditName', 'AuditOpinion']
@@ -47,10 +47,15 @@ class SimplePacker(BasePacker):
             return return_list
 
         pack_list = []
+        remark_dict = None
         for item in structure_list:
             # 过滤掉不用返回的列
             if item[0] in ignore_col_list or re_CD_end.search(item[0]) is not None:
                 continue
             item_dict = dict(data_process(zip(dict_key, item)))
+            if item[0] == 'Remark':
+                # 缓存remark数据
+                remark_dict = item_dict
+                continue
             pack_list.append(item_dict)
-        return pack_list
+        return pack_list, False if remark_dict is None else True

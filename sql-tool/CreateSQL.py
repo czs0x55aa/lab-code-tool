@@ -46,9 +46,11 @@ def update_comment():
 def update_field_name():
     """ 更新字段名称 """
     field_name_dict = {
-        'DocDate': 'MakeDate',
-        'LastModifierUserId': 'LastModifierUserCD',
-        'PurchaseBatchNo': 'PurchaseBatch'
+        # 'DocDate': 'MakeDate',
+        # 'LastModifierUserId': 'LastModifierUserCD',
+        # 'PurchaseBatchNo': 'PurchaseBatch'
+        'Sort': 'SortNum',
+        'sort': 'SortNum'
     }
     for table_name in table_name_list:
         for old_name, new_name in field_name_dict.items():
@@ -116,4 +118,4 @@ def modify_field():
 
 if __name__ == '__main__':
 
-    update_comment()
+    update_field_name()

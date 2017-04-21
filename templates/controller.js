@@ -39,17 +39,17 @@
         }
 
         var del = $scope.del = function () {
+            var IDs = [];
+            for (var x in $scope.list.Data) {
+                if ($scope.list.Data[x].select == true) {
+                    IDs.push($scope.list.Data[x].ID);
+                }
+            }
+            if (IDs.length < 1) {
+                toaster.pop('error', '警告', '您至少得选择一条记录才能删除！')
+                return;
+            }
             MyDialogs.DeleteConfirm().then(function (value) {
-                var IDs = [];
-                for (var x in $scope.list.Data) {
-                    if ($scope.list.Data[x].select == true) {
-                        IDs.push($scope.list.Data[x].ID);
-                    }
-                }
-                if (IDs.length < 1) {
-                    toaster.pop('error', '警告', '您至少得选择一条记录才能删除！')
-                    return;
-                }
                 << table_name >>.Deletes(IDs, function (r) {
                     if (r.Success) {
                         toaster.pop('success', '操作成功提示', '数据删除成功！')

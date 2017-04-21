@@ -42,6 +42,7 @@ if __name__ == '__main__':
     os.mkdir(outPath)
     # 添加额外的Controller目录 用于存放js控制器
     os.mkdir(outPath + 'Controller/')
+    os.mkdir(outPath + 'View/')
 
     db = OracleManager()
     # 创建打包器，封装表结构
@@ -51,8 +52,8 @@ if __name__ == '__main__':
     # 对每张表生成
     for table_name in table_list:
         # 封装主从表结构数据
-        table_dict_list = simple_packer.pack_single_table(table_name)
-        detail_dict_list = simple_packer.pack_single_table(table_name + 'Detail')
+        table_dict_list, remark_flag = simple_packer.pack_single_table(table_name)
+        detail_dict_list, _ = simple_packer.pack_single_table(table_name + 'Detail')
         # 封装页面中要渲染的数据
         render_module = {
             'base_path': base_path,
@@ -62,14 +63,15 @@ if __name__ == '__main__':
             'field_list': [] if table_dict_list is None else table_dict_list,
             'detail_field_list': [] if detail_dict_list is None else detail_dict_list,
             'list_len': 0 if table_dict_list is None else len(table_dict_list),
-            'detail_list_len': 0 if detail_dict_list is None else len(detail_dict_list)
+            'detail_list_len': 0 if detail_dict_list is None else len(detail_dict_list),
+            'remark_flag': remark_flag
         }
 
         def get_file_name(name, suff):
             return ''.join([name, '.', suff])
         # 指定要使用的模板和对应的生成文件名
-        template_pages = {'list.html': get_file_name(table_name, 'html'),
-                        'edit.html' if detail_dict_list is None else 'mutiple_edit.html': get_file_name(table_name+'edit', 'html'),
+        template_pages = {'list.html': get_file_name('View/'+table_name, 'html'),
+                        'edit.html' if detail_dict_list is None else 'mutiple_edit.html': get_file_name('View/'+table_name+'edit', 'html'),
                         'controller.js': get_file_name('Controller/'+table_name, 'js'),
                         'dicserver.js': get_file_name(table_name+'_dicserver', 'js'),
                         'route.js': get_file_name(table_name+'_route', 'js'),
