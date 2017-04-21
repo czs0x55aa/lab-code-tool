@@ -1,0 +1,18 @@
+{
+	"output_dir": "Quality/",
+	"base_path": "Quality",
+	"base_path_name": "质量管理",
+	"table_list": [
+		{"table_name":"CaboIndustryQuality"},
+		{"table_name":"CaboInQualityTest"},
+		{"table_name":"CaboStockQuality"},
+		{"table_name":"QualityInspection"},
+		{"table_name":"SampleSmokeEvaluation"},
+		{"table_name":"SliceColorInQualityTest"},
+		{"table_name":"SliceInQualityTest"},
+		{"table_name":"StripsIndustryQuality"},
+		{"table_name":"StripsInQualityTest"},
+		{"table_name":"StripsStockQuality"},
+		{"table_name":"TobaccoIndustryQuality"},
+		{"table_name":"TobaccoStockQuality"}]
+}
