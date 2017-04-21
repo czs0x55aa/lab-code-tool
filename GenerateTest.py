@@ -40,15 +40,13 @@ if __name__ == '__main__':
         # 如果输出目录已经存在 递归删除整个目录
         shutil.rmtree(outPath)
     os.mkdir(outPath)
-    # 添加额外的Controller和View目录 单独存放控制器和视图
+    # 添加额外的Controller目录 用于存放js控制器
     os.mkdir(outPath + 'Controller/')
     os.mkdir(outPath + 'View/')
 
     db = OracleManager()
     # 创建打包器，封装表结构
     simple_packer = SimplePacker(db)
-    # 获取所有Dic表的表名
-    dic_table_name_list = simple_packer.get_dic_name_list()
     # 创建生成器对象
     code_builder = HTMLBuilder()
     # 对每张表生成
@@ -66,7 +64,6 @@ if __name__ == '__main__':
             'detail_field_list': [] if detail_dict_list is None else detail_dict_list,
             'list_len': 0 if table_dict_list is None else len(table_dict_list),
             'detail_list_len': 0 if detail_dict_list is None else len(detail_dict_list),
-            'dic_name_list': dic_table_name_list
             'remark_flag': remark_flag
         }
 

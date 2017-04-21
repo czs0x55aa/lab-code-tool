@@ -55,14 +55,6 @@ class OracleManager(object):
             return None
         return query_res
 
-    def get_dic_tablename(self):
-        """
-        查询所有Dic表的表名
-        """
-        query_sql = "select table_name from user_tables where table_name like 'Dic%'"
-        query_res = self.execute_sql(query_sql)
-        return [x[0] for x in query_res]
-
 
 db_namespace = 'GXZY_USER'
 class SQLTool(OracleManager):
