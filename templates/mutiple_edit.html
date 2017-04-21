@@ -103,7 +103,7 @@
                         </thead>
                         <tbody>
                             <tr ng-show="d.<< table_name >>Detail.length< 1">
-                                <td class="text-center" colspan="<< detail_list_len >>">没有数据</td>
+                                <td class="text-center" colspan="<< detail_list_len + 2 >>">没有数据</td>
                             </tr>
                             <tr ng-dblclick="rowform.$visible==false?rowform.$show():rowform.$submit()" ng-hide="d.<< table_name >>Detail.length< 1" ng-repeat="item in d.<< table_name >>Detail">
                                 <td ng-show="d.DataStatus<2" style="white-space: nowrap">

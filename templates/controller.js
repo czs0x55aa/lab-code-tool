@@ -78,9 +78,14 @@
                 $scope.d.MakeDate = $filter('date')(myDate, 'yyyy-MM-dd');
                 $scope.d.MakingPeople = $rootScope.user.Name;
                 $scope.d.DataStatus = 0;
+                $scope.d.Operator = $rootScope.user.Name;
+                $scope.d.FillPerson = $rootScope.user.Name;
+                $scope.d.FillDate = $filter('date')(myDate, 'yyyy-MM-dd');
+                $scope.d.Year = $filter('date')(myDate, 'yyyy');
                 SysReceiptConfig.GetBillNO({ TypeTab: "<< table_name >>" }, function (r) {
                     $scope.d.ReceiptNum = r.Result.BillNO;
                     $scope.d.ISO = r.Result.ISO;
+
                 });
             }
         }
