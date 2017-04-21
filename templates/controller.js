@@ -156,7 +156,7 @@
 
         <%- for dic_name in dic_name_list %>
         // << loop.index >>. << dic_name >>
-        $scope.Dic<< dic_name >>s = []; //字典
+        $scope.Dic<< dic_name >>s = [];
         $scope.loadDic<< dic_name >>s = function () {
             if (!$scope.Dic<< dic_name >>s.length)
                 Dic<< dic_name >>.Get({}, function (r) {
