@@ -6,6 +6,10 @@ class BasePacker(object):
         self.db = db
 
 class SimplePacker(BasePacker):
+    def get_dic_name_list(self):
+        table_name_list = self.db.get_dic_tablename()
+        return [x[3:] for x in table_name_list]
+
     def pack_single_table(self, table_name):
         structure_list = self.db.get_table_structure(table_name)
         # 检查查询结果是否为空
