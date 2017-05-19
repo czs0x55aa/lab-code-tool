@@ -16,3 +16,9 @@
     controller: '<< table_name >>EditController',
     resolve: helper.resolveFor('toaster', 'ngDialog', 'xeditable')
 })
+.state('app.<< base_path >>.<< table_name >>.view', {
+  url: '/view?ID&type',
+  templateUrl: helper.basepath('<< base_path >>/<< table_name >>View.html'),
+  controller: '<< table_name >>ViewController',
+  resolve: helper.resolveFor('toaster')
+})

@@ -1,0 +1,69 @@
+
+<div ng-class="{'whirl':isLoading,'traditional':isLoading}">
+    <h3 class="hidden-print">
+        <span class="pull-right">
+            <a class="btn btn-info btn-sm" ui-sref="app.<< base_path >>.<< table_name >>.edit({ID:d.ID})"><i class="fa fa-file-text-o"></i>关闭</a>
+            <a class="btn btn-info btn-sm" print-area area-id="divPrint" id="print"><i class="fa fa-print"></i> 打印 </a>
+        </span>
+          << table_name_zh >>
+        <ol class="breadcrumb">
+            <li>
+              << base_path_name >>
+            </li>
+            <li>
+                <a ui-sref="app.<< base_path >>.<< table_name >>.list">
+                  << table_name_zh >>
+                </a>
+            </li>
+            <li class="active">报表</li>
+        </ol>
+    </h3>
+    <div class="row">
+        <div  class="panel panel-default">
+            <div class="panel-body" >
+                <div id="divPrint">
+                    <h4 class="report-head"><< table_name_zh >></h4>
+                    <table class="report-main">
+                        <%- for column_info in field_list %>
+                        <tr>
+                          <td><< column_info.col_comment >>：</td>
+                          <%- if column_info.col_type == 'date' %>
+                          <td><p>{{d.<< column_info.col_name >>|date:'yyyy-MM-dd'}}</p></td>
+                          <%- elif column_info.col_type == 'enum'%>
+                          <%- if column_info.col_name != 'AuditStatus' %>
+                          <td><p>{{ d.<< column_info.col_name >>|enum:'EnumOneAuditStatusType'}}</p></td>
+                          <%- else %>
+                          <td><p>{{ d.AuditStatus|enum:'EnumFourAuditStatusTypePlan'}}</p></td>
+                          <%- endif %>
+                          <%- else %>
+                          <td><p>{{d.<< column_info.col_name >>}}</p></td>
+                          <%- endif %>
+                        </tr>
+                        <%- if loop.index % 3 == 0 %>
+                        </tr>
+                        <tr>
+                        <%- endif %>
+                    </table>
+                    <table class="report-detail">
+                        <tr>
+                            <th>行号</th>
+                            <%- for column_info in detail_field_list %>
+                            <th><< column_info.col_comment >></th>
+                            <%- endfor %>
+                        </tr>
+                        <tr ng-hide="d.<< table_name >>Detail.length< 1" ng-repeat="item in d.<< table_name >>Detail" repeat-finished-render>
+                            <td>{{$index+1}}</td>
+                            <%- for column_info in detail_field_list %>
+                            <%- if column_info.col_type == 'number' %>
+                            <td class="right">{{ item.<< column_info.col_name >>}}</td>
+                            <%- else %>
+                            <td>{{ item.<< column_info.col_name >>}}</td>
+                            <%- endif %>
+                            <%- endfor %>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

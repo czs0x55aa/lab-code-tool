@@ -3,6 +3,7 @@
     angular.module('angle')
     .controller('<< table_name >>Controller', << table_name >>Controller)
     .controller('<< table_name >>EditController', << table_name >>EditController)
+    .controller('<< table_name >>ViewController', << table_name >>ViewController)
 
     << table_name >>Controller.$inject = ['$scope', '$stateParams', '$state', 'ngDialog','MyDialogs', 'toaster', '$filter', '$q', '<< table_name >>'];
     function << table_name >>Controller($scope, $stateParams, $state, ngDialog, MyDialogs, toaster, $filter, $q, << table_name >>) {
@@ -76,11 +77,15 @@
             } else {
                 var myDate = new Date();
                 $scope.d.MakeDate = $filter('date')(myDate, 'yyyy-MM-dd');
-                $scope.d.MakingPeople = $rootScope.user.Name;
+                $scope.d.MakingPeople = $rootScope.user.UserName;
+                // 添加数据状态
                 $scope.d.DataStatus = 0;
-                $scope.d.Operator = $rootScope.user.Name;
-                $scope.d.FillPerson = $rootScope.user.Name;
-                $scope.d.FillDate = $filter('date')(myDate, 'yyyy-MM-dd');
+                 // 添加审核状态
+                $scope.d.AuditStatus = 0
+                $scope.d.Operator = $rootScope.user.UserName;
+                $scope.d.OperatorName = $rootScope.user.UserName;
+                $scope.d.FillPerson = $rootScope.user.UserName;
+                $scope.d.FillingDate = $filter('date')(myDate, 'yyyy-MM-dd');
                 $scope.d.Year = $filter('date')(myDate, 'yyyy');
                 SysReceiptConfig.GetBillNO({ TypeTab: "<< table_name >>" }, function (r) {
                     $scope.d.ReceiptNum = r.Result.BillNO;
@@ -141,23 +146,6 @@
                 $scope.subIDs.IDs.push(ID);
         };
 
-        $scope.DicWarehouses = []; //字典
-        $scope.loadDicWarehouses = function () {
-            if (!$scope.DicWarehouses.length)
-                DicWarehouse.Get({}, function (r) {
-                    $scope.DicWarehouses = r.Result.Data;
-                })
-        };
-
-        $scope.showDicWarehouse = function (item) {
-            if (item.WarehouseCD && $scope.DicWarehouses.length) {
-                var selected = $filter('filter')($scope.DicWarehouses, { SYS_USER_CD: item.WarehouseCD });
-                item.WarehouseName = selected.length ? selected[0].SYS_CD_NM : "";
-            }
-            return item.WarehouseName;
-
-        };
-
         // 提交
         $scope.confirm = function (status) {
             MyDialogs.Confirm().then(function (value) {
@@ -198,7 +186,31 @@
         $scope.showAudit = function (FID) {
             MyDialogs.ShowAuditOpinion(FID);
        }
-
     }
+
+    << table_name>>ViewController.$inject = ['$rootScope', '$scope', '$stateParams', '$state', '<< table_name >>'];
+   function << table_name >>ViewController($rootScope, $scope, $stateParams, $state, << table_name >>) {
+
+       var load = $scope.load = function () {
+           if ($stateParams.ID) {
+               $scope.isLoading = true
+               $scope.subIDs = { "IDs": [], "FID": $stateParams.ID };
+               << table_name >>.Get({ ID: $stateParams.ID }, function (r) {
+                   $scope.d = r.Result;
+                   $scope.isLoading = false;
+               })
+           }
+       }
+
+       load();
+
+       if ($stateParams.type && $stateParams.type == 1) { //直接打印
+            $scope.$on("ngRepeatFinished", function (repeatFinishedEvent, element) {
+                var bt = document.getElementById("print");
+                bt.click();
+            });
+        }
+
+   }
 
 })();
