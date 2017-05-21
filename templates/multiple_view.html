@@ -44,6 +44,24 @@
                         <tr>
                         <%- endif %>
                     </table>
+                    <table class="report-detail">
+                        <tr>
+                            <th>行号</th>
+                            <%- for column_info in detail_field_list %>
+                            <th><< column_info.col_comment >></th>
+                            <%- endfor %>
+                        </tr>
+                        <tr ng-hide="d.<< table_name >>Detail.length< 1" ng-repeat="item in d.<< table_name >>Detail" repeat-finished-render>
+                            <td>{{$index+1}}</td>
+                            <%- for column_info in detail_field_list %>
+                            <%- if column_info.col_type == 'number' %>
+                            <td class="right">{{ item.<< column_info.col_name >>}}</td>
+                            <%- else %>
+                            <td>{{ item.<< column_info.col_name >>}}</td>
+                            <%- endif %>
+                            <%- endfor %>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
