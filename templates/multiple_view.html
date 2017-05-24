@@ -38,12 +38,12 @@
                           <%- else %>
                           <td><p>{{d.<< column_info.col_name >>}}</p></td>
                           <%- endif %>
-                        </tr>
                         <%- if loop.index % 3 == 0 %>
                         </tr>
                         <tr>
                         <%- endif %>
                         <%- endfor %>
+                        </tr>
                     </table>
                     <table class="report-detail">
                         <tr>
