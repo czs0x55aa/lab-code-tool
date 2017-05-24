@@ -24,8 +24,8 @@
                 <div id="divPrint">
                     <h4 class="report-head"><< table_name_zh >></h4>
                     <table class="report-main">
+                      <tr>
                         <%- for column_info in field_list %>
-                        <tr>
                           <td><< column_info.col_comment >>：</td>
                           <%- if column_info.col_type == 'date' %>
                           <td><p>{{d.<< column_info.col_name >>|date:'yyyy-MM-dd'}}</p></td>
@@ -38,12 +38,12 @@
                           <%- else %>
                           <td><p>{{d.<< column_info.col_name >>}}</p></td>
                           <%- endif %>
-                        </tr>
                         <%- if loop.index % 3 == 0 %>
                         </tr>
                         <tr>
                         <%- endif %>
                         <%- endfor %>
+                        </tr>
                     </table>
                 </div>
             </div>
