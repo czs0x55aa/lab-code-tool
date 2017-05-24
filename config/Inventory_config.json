@@ -1,0 +1,15 @@
+{
+	"output_dir": "Inventory/",
+	"base_path": "Inventory",
+	"base_path_name": "库存",
+	"table_list": [
+		{"table_name":"DifferenceAdjust"},
+		{"table_name":"MoveInInventory"},
+		{"table_name":"MoveOutInventory"},
+		{"table_name":"PendingMark"},
+		{"table_name":"PendingUsableMark"},
+		{"table_name":"TransitLoss"},
+		{"table_name":"GoodsOutRecords"},
+		{"table_name":"GoodsInRecords"}
+	]
+}
