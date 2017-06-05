@@ -14,7 +14,7 @@
     url: '/edit?ID',
     templateUrl: helper.basepath('<< base_path >>/<< table_name >>edit.html'),
     controller: '<< table_name >>EditController',
-    resolve: helper.resolveFor('toaster', 'ngDialog', 'xeditable')
+    resolve: helper.resolveFor('toaster', 'ngDialog', 'xeditable', 'ui.select', 'moment')
 })
 .state('app.<< base_path >>.<< table_name >>.view', {
   url: '/view?ID&type',
