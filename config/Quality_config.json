@@ -14,5 +14,8 @@
 		{"table_name":"StripsInQualityTest"},
 		{"table_name":"StripsStockQuality"},
 		{"table_name":"TobaccoIndustryQuality"},
-		{"table_name":"TobaccoStockQuality"}]
+		{"table_name":"TobaccoStockQuality"},
+		{"table_name":"CaboProcessTest"},
+		{"table_name":"StripsProcessTest"}
+	]
 }
