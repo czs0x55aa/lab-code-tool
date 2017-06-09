@@ -10,6 +10,12 @@
 		{"table_name":"PendingUsableMark"},
 		{"table_name":"TransitLoss"},
 		{"table_name":"GoodsOutRecords"},
-		{"table_name":"GoodsInRecords"}
+		{"table_name":"GoodsInRecords"},
+		{"table_name":"GoodsInventory"},
+		{"table_name":"AdjustAdd"},
+		{"table_name":"AdjustMinus"},
+		{"table_name":"Discarde"},
+		{"table_name":"TransitLoss"},
+		{"table_name":"BusinessRedService"}
 	]
 }

@@ -1,0 +1,11 @@
+{
+	"output_dir": "Settle/",
+	"base_path": "Settle",
+	"base_path_name": "结算管理",
+	"table_list": [
+		{"table_name":"PurchaseInvoiceInform"},
+		{"table_name":"PurchaseInvoice"},
+		{"table_name":"PurchaseInvoiceCheck"},
+		{"table_name":"PurchaseInInventory"}
+	]
+}

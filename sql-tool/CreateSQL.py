@@ -7,33 +7,46 @@ from DBconnect import SQLTool
 # 链接数据库
 sql_tool = SQLTool()
 # 获取所有表名，过滤掉Yb开头的表
-table_name_list = [x for x in sql_tool.get_all_tables_name() if x.find('Yb') == -1]
+# table_name_list = [x for x in sql_tool.get_all_tables_name() if x.find('Yb') == -1]
+table_name_list = [
+    'GoodsInventory',
+    'PendingMark',
+    'ScrapedInformation',
+    'DifferenceAdjust',
+    'DifferenceAdjustDetail',
+    'AdjustAdd',
+    'AdjustAddDetail',
+    'AdjustMinus',
+    'AdjustMinusDetail',
+    'MoveInventory',
+    'MoveInventoryDetail'
+]
 
 def update_comment():
     """ 修改字段备注 """
     # 定义要修改的字段名和备注名
     field_comment_dict = {
-        # 'DataStatus': u'数据状态',
-        'AuditStatus': u'审核状态'
-        # 'MakeDate': u'制单日期',
-        # 'IsDeleted': u'是否删除',
-        # 'DeleterUserCD': u'删除代码',
-        # 'DeletionTime': u'删除时间',
-        # 'LastModificationTime': u'修改时间',
-        # 'LastModiferUserCD': u'修改人',
-        # 'CreationTime': u'创建时间',
-        # 'CreatorUserCD': u'创建者',
-        # 'AuditTime': u'审核日期',
-        # 'AuditCD': u'审核人代码',
-        # 'AuditName': u'审核人',
-        # 'AuditOpinion': u'审核意见'
+        'DataStatus': u'数据状态',
+        'AuditStatus': u'审核状态',
+        'MakeDate': u'制单日期',
+        'IsDeleted': u'是否删除',
+        'DeleterUserCD': u'删除代码',
+        'DeletionTime': u'删除时间',
+        'LastModificationTime': u'修改时间',
+        'LastModiferUserCD': u'修改人',
+        'CreationTime': u'创建时间',
+        'CreatorUserCD': u'创建者',
+        'AuditTime': u'审核日期',
+        'AuditCD': u'审核人代码',
+        'AuditName': u'审核人',
+        'AuditOpinion': u'审核意见',
         # 'ID': u'主键',
         # 'Sort': u'排序',
         # 'Code': u'代码',
         # 'Name': u'中文名称',
         # 'HelpWord': u'助记词',
         # 'Remark': u'备注',
-        # 'LastModifierUserCD ': u'修改人',
+        'LastModifierUserCD ': u'修改人',
         # 'Ratio': u'系数'
     }
     for table_name in table_name_list:
@@ -81,7 +94,7 @@ def delete_field_name():
 def add_field():
     """ 添加字段 """
     add_field_dict = {
-        "IsDeleted": ('NUMBER(2)', 'default 0'),
+        "IsDeleted": ('NUMBER(8)', 'default 0'),
         'DeleterUserCD': ('VARCHAR2(20)', ''),
         'DeletionTime': ('TIMESTAMP', ''),
         'LastModificationTime': ('TIMESTAMP', ''),
@@ -104,8 +117,8 @@ def add_field():
 
 def modify_field():
     modify_dict = {
-        # 'IsDeleted': ('NUMBER(2)', 'default 0')
-        'ReceiptNum': ('VARCHAR2(40)', '')
+        'IsDeleted': ('NUMBER(8)', 'default 0')
+        # 'ReceiptNum': ('VARCHAR2(40)', '')
     }
     for table_name in table_name_list:
         for field, ele in modify_dict.items():
@@ -117,5 +130,5 @@ def modify_field():
 
 
 if __name__ == '__main__':
-
-    update_field_name()
+    # add_field()
+    update_comment()

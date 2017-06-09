@@ -1,0 +1,8 @@
+{
+	"output_dir": "SysConfig/",
+	"base_path": "SysConfig",
+	"base_path_name": "系统管理",
+	"table_list": [
+		{"table_name":"SysReceiptConfig"}
+	]
+}

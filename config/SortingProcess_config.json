@@ -1,14 +1,8 @@
 {
 	"output_dir": "SortingProcess/",
 	"base_path": "SortingProcess",
-	"base_path_name": "库存管理",
+	"base_path_name": "分选加工",
 	"table_list": [
-		{"table_name":"SortingScheme"},
-		{"table_name":"TobaccoSortingOut"},
-		{"table_name":"TobaccoSortingIn"},
-		{"table_name":"StripSortingOut"},
-		{"table_name":"StripSortingOutVR"},
-		{"table_name":"StripSortingIn"},
-		{"table_name":"StripSortingInVR"}
+		{"table_name":"ProcessScheme"}
 	]
 }
