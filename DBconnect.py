@@ -23,8 +23,13 @@ class OracleManager(object):
         self.cursor = self.db_connect.cursor()
 
     def execute_sql(self, sql_str):
+        print sql_str
         query_res = self.cursor.execute(sql_str)
         return query_res.fetchall()
+
+    def get_all_tables(self):
+        query_sql = "select table_name from user_tables"
+        return [x[0] for x in self.execute_sql(query_sql)]
 
     def get_table_comment(self, table_name):
         """
