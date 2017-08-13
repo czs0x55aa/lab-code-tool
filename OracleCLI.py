@@ -78,9 +78,24 @@ class Parser(object):
 
 
 if __name__ == '__main__':
-    dbManager = OracleManager()
-    cmdParser = Parser(dbManager)
-    while True:
-        cmd = raw_input('input:')
-        cmdParser.resolve(cmd)
-        print ('\n')
+    # dbManager = OracleManager()
+    # cmdParser = Parser(dbManager)
+    # while True:
+    #     cmd = raw_input('> ')
+    #     cmdParser.resolve(cmd)
+    #     print ('\n',)
+    from prompt_toolkit import prompt
+    from prompt_toolkit.key_binding.manager import KeyBindingManager
+    from prompt_toolkit.keys import Keys
+
+    manager = KeyBindingManager.for_prompt()
+
+    @manager.registry.add_binding(Keys.ControlT)
+    def ControlT(event):
+        def print_hello():
+            print('hello world')
+        print '111'
+        event.cli.run_in_terminal(print_hello)
+
+    text = prompt(u'> ', key_bindings_registry=manager.registry)
+    print('You said: %s' % text)
