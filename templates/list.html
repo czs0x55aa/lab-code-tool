@@ -54,7 +54,7 @@
                             <tr ng-show="list.Data.length< 1">
                                 <td class="text-center" colspan="<< list_len + 2 >>">没有数据</td>
                             </tr>
-                            <tr ng-dblclick="edit(item.ID)" ng-click="item.select==true?item.select=false:item.select=true" ng-hide="list.Data.length< 1" ng-repeat="item in list.Data">
+                            <tr ng-class="{selected: item.select==true}" ng-dblclick="edit(item.ID)" ng-click="item.select==true?item.select=false:item.select=true" ng-hide="list.Data.length< 1" ng-repeat="item in list.Data">
                                 <td clickselect="selected" select="row">
                                     <div class="checkbox c-checkbox" style="margin:0">
                                         <label>
