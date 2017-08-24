@@ -1,9 +1,13 @@
 # coding=utf8
-import cx_Oracle
+
 import os
+import sys
 
 # default configuation
+# reload(sys)
+# sys.setdefaultencoding('utf-8')
 os.environ['NLS_LANG'] = 'SIMPLIFIED CHINESE_CHINA.UTF8'
+import cx_Oracle
 
 oracle_user = 'gxzy_user'
 oracle_passwd = 'gxzy_user_2291862'
@@ -23,7 +27,7 @@ class OracleManager(object):
         self.cursor = self.db_connect.cursor()
 
     def execute_sql(self, sql_str):
-        print sql_str
+        # print sql_str
         query_res = self.cursor.execute(sql_str)
         return query_res.fetchall()
 
