@@ -170,7 +170,7 @@
         $scope.check = function (status) {
             MyDialogs.Check().then(function (value) {
                 $scope.isLoading = true
-                << table_name >>.Audit({ 'ID': $scope.d.ID, 'AuditStatus': parseInt($scope.d.AuditStatus) + parseInt(status), 'AuditOpinions': value }, function (r) {
+                << table_name >>.Audit({ 'ID': $scope.d.ID, 'AuditStatus': parseInt($scope.d.AuditStatus) + parseInt(status), 'AuditOpinion': value }, function (r) {
                     if (r.Success) {
                         $scope.isLoading = false;
                         toaster.pop('success', '操作成功提示', "审核成功！");
